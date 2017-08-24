@@ -5,14 +5,11 @@
  */
 package com.aztsoft.gym.controller;
 
-import com.aztsoft.gym.model.dto.Customer;
-import com.aztsoft.gym.view.CustomerForm;
-
 /**
  *
  * @author windows
  */
 public interface CustomerController {
     
-    void postClient(CustomerForm customerView, Customer customerModel);
+    void postClient();
 }

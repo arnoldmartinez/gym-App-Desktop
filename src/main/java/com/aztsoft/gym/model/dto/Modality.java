@@ -9,7 +9,7 @@ package com.aztsoft.gym.model.dto;
  *
  * @author Arnold Martinez Martinez(arnold9108@gmail.com).
  */
-public class Mode {
+public class Modality {
     
     public static final int VISIT = 1;
     public static final int WEEKLE = 2;

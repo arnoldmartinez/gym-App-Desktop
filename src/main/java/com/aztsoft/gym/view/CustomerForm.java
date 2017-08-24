@@ -19,7 +19,6 @@ public class CustomerForm extends javax.swing.JFrame {
      */
     public CustomerForm() {
         initComponents();
-        
     }
 
     /**

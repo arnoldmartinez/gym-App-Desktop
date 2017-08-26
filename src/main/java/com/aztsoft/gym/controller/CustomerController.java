@@ -11,5 +11,5 @@ package com.aztsoft.gym.controller;
  */
 public interface CustomerController {
     
-    void postClient();
+    void postCustomer();
 }

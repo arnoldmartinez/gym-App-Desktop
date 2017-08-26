@@ -6,14 +6,14 @@
 package com.aztsoft.gym.view;
 
 import com.aztsoft.gym.controller.CustomerController;
-import com.aztsoft.gym.controller.CustomerControllerImpl;
+import com.aztsoft.gym.controller.CustomerControllerImp;
 
 /**
  *
  * @author windows
  */
 public class CustomerForm extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form ClientForm
      */
@@ -53,7 +53,7 @@ public class CustomerForm extends javax.swing.JFrame {
         radMonthly = new javax.swing.JRadioButton();
         radAnnual = new javax.swing.JRadioButton();
         pnlCommand = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnPostClient = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -222,10 +222,10 @@ public class CustomerForm extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPostClient.setText("Agregar");
+        btnPostClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPostClientActionPerformed(evt);
             }
         });
 
@@ -235,14 +235,14 @@ public class CustomerForm extends javax.swing.JFrame {
             pnlCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCommandLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(btnPostClient)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlCommandLayout.setVerticalGroup(
             pnlCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCommandLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPostClient, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -283,14 +283,14 @@ public class CustomerForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        CustomerImpl customer = new CustomerImpl(this);
-        customer.postClient();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnPostClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostClientActionPerformed
+        CustomerController customerController = new CustomerControllerImp(this);
+        customerController.postCustomer();
+    }//GEN-LAST:event_btnPostClientActionPerformed
 
     private void txtAgeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAgeKeyTyped
         char alphabeticTyped = evt.getKeyChar();
-        if(Character.isAlphabetic(alphabeticTyped)){
+        if (Character.isAlphabetic(alphabeticTyped)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -298,7 +298,7 @@ public class CustomerForm extends javax.swing.JFrame {
 
     private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
         char digitTyped = evt.getKeyChar();
-        if(Character.isDigit(digitTyped)){
+        if (Character.isDigit(digitTyped)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -306,7 +306,7 @@ public class CustomerForm extends javax.swing.JFrame {
 
     private void txtSurnamesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSurnamesKeyTyped
         char alphabeticType = evt.getKeyChar();
-        if(Character.isDigit(alphabeticType)){
+        if (Character.isDigit(alphabeticType)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -349,8 +349,8 @@ public class CustomerForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPostClient;
     private org.jdesktop.swingx.JXDatePicker dpRegistrationDate;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblAge;
     private javax.swing.JLabel lblPhoto;
@@ -375,20 +375,4 @@ public class CustomerForm extends javax.swing.JFrame {
     public javax.swing.JTextField txtSurnames;
     // End of variables declaration//GEN-END:variables
 
-    class CustomerImpl implements CustomerView {
-
-        private CustomerForm customerView;
-        
-        public CustomerImpl(CustomerForm customerView) {
-            this.customerView = customerView;
-        }
-        
-        @Override
-        public void postClient() {
-            CustomerController customerController = new CustomerControllerImpl(customerView);
-            customerController.postClient();
-        }
-        
-    }
-    
 }

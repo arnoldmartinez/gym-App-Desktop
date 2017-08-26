@@ -5,25 +5,29 @@
  */
 package com.aztsoft.gym.controller;
 
+import com.aztsoft.gym.model.dao.CustomerDao;
+import com.aztsoft.gym.model.dao.CustomerDaoImp;
 import com.aztsoft.gym.model.dto.Customer;
 import com.aztsoft.gym.model.dto.Modality;
 import com.aztsoft.gym.view.CustomerForm;
 
 /**
  *
- * @author windows
+ * @author arnold9108@gmail.com
  */
-public class CustomerControllerImpl implements CustomerController {
+public class CustomerControllerImp implements CustomerController {
 
     private final CustomerForm customerView;
+    private CustomerDao customerDao;
 
-    public CustomerControllerImpl(CustomerForm customerView) {
+    public CustomerControllerImp(CustomerForm customerView) {
         this.customerView = customerView;
+        customerDao = new CustomerDaoImp();
     }
     
     @Override
-    public void postClient() {
-        
+    public void postCustomer() {
+        customerDao.postCustomer(getDataClient());
     }
     
     private Customer getDataClient() {

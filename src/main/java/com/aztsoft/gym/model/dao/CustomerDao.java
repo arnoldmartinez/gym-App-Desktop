@@ -5,12 +5,12 @@
  */
 package com.aztsoft.gym.model.dao;
 
-import com.aztsoft.gym.model.dto.Customer;
+import com.aztsoft.gym.model.dto.CustomerRegistration;
 
 /**
  *
  * @author windows
  */
 public interface CustomerDao {
-    void postCustomer(Customer customer);
+    void postCustomer(CustomerRegistration customer);
 }

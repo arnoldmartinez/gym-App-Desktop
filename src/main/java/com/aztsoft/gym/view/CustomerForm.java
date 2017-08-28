@@ -7,6 +7,8 @@ package com.aztsoft.gym.view;
 
 import com.aztsoft.gym.controller.CustomerController;
 import com.aztsoft.gym.controller.CustomerControllerImp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -14,11 +16,13 @@ import com.aztsoft.gym.controller.CustomerControllerImp;
  */
 public class CustomerForm extends javax.swing.JFrame {
 
+    private final CustomerController customerController;
+   
     /**
      * Creates new form ClientForm
      */
     public CustomerForm() {
-        initComponents();
+        customerController = new CustomerControllerImp(this);
     }
 
     /**
@@ -33,12 +37,10 @@ public class CustomerForm extends javax.swing.JFrame {
         pnlDataClient = new javax.swing.JPanel();
         lblname = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        txtSurnames = new javax.swing.JTextField();
-        lblSurnames = new javax.swing.JLabel();
         lblAge = new javax.swing.JLabel();
         txtAge = new javax.swing.JTextField();
         lblRegistrationDate = new javax.swing.JLabel();
-        dpRegistrationDate = new org.jdesktop.swingx.JXDatePicker();
+        lblDate = new javax.swing.JLabel();
         pnlPhoto = new javax.swing.JPanel();
         lblPhoto = new javax.swing.JLabel();
         pnlAddress = new javax.swing.JPanel();
@@ -56,6 +58,13 @@ public class CustomerForm extends javax.swing.JFrame {
         btnPostClient = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         lblname.setText("Nombre: ");
 
@@ -65,14 +74,6 @@ public class CustomerForm extends javax.swing.JFrame {
                 txtNameKeyTyped(evt);
             }
         });
-
-        txtSurnames.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtSurnamesKeyTyped(evt);
-            }
-        });
-
-        lblSurnames.setText("Apellidos:");
 
         lblAge.setText("Edad:");
 
@@ -89,39 +90,38 @@ public class CustomerForm extends javax.swing.JFrame {
         pnlDataClientLayout.setHorizontalGroup(
             pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDataClientLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblname)
-                    .addComponent(lblSurnames)
-                    .addComponent(lblAge))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlDataClientLayout.createSequentialGroup()
-                        .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(97, 97, 97)
-                        .addComponent(lblRegistrationDate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dpRegistrationDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtName)
-                    .addComponent(txtSurnames))
-                .addContainerGap(143, Short.MAX_VALUE))
+                        .addGap(14, 14, 14)
+                        .addComponent(lblAge)
+                        .addGap(26, 26, 26)
+                        .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlDataClientLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblname)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(138, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDataClientLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblRegistrationDate)
+                .addGap(18, 18, 18)
+                .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
         );
         pnlDataClientLayout.setVerticalGroup(
             pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDataClientLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblname)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(lblRegistrationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSurnames, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSurnames))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblname))
+                .addGap(18, 18, 18)
                 .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAge)
-                    .addComponent(lblRegistrationDate)
-                    .addComponent(dpRegistrationDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -284,7 +284,6 @@ public class CustomerForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPostClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostClientActionPerformed
-        CustomerController customerController = new CustomerControllerImp(this);
         customerController.postCustomer();
     }//GEN-LAST:event_btnPostClientActionPerformed
 
@@ -304,13 +303,11 @@ public class CustomerForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtNameKeyTyped
 
-    private void txtSurnamesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSurnamesKeyTyped
-        char alphabeticType = evt.getKeyChar();
-        if (Character.isDigit(alphabeticType)) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtSurnamesKeyTyped
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
+        lblDate.setText(format.format(date));
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
@@ -350,12 +347,11 @@ public class CustomerForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPostClient;
-    private org.jdesktop.swingx.JXDatePicker dpRegistrationDate;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblAge;
+    public javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblPhoto;
     private javax.swing.JLabel lblRegistrationDate;
-    private javax.swing.JLabel lblSurnames;
     private javax.swing.JLabel lblTypeRenter;
     private javax.swing.JLabel lblname;
     private javax.swing.JPanel pnlAddress;
@@ -372,7 +368,10 @@ public class CustomerForm extends javax.swing.JFrame {
     public javax.swing.JTextArea txaAddress;
     public javax.swing.JTextField txtAge;
     public javax.swing.JTextField txtName;
-    public javax.swing.JTextField txtSurnames;
     // End of variables declaration//GEN-END:variables
 
+    public void startView(){
+        initComponents();
+    }
+    
 }

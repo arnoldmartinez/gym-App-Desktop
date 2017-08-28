@@ -13,7 +13,6 @@ public class Customer {
     
     private String id;
     private String name;
-    private String surnames;
     private int age;
     private String address;
     private int plan;
@@ -44,20 +43,6 @@ public class Customer {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * @return the surnames
-     */
-    public String getSurnames() {
-        return surnames;
-    }
-
-    /**
-     * @param surnames the surnames to set
-     */
-    public void setSurnames(String surnames) {
-        this.surnames = surnames;
     }
 
     /**

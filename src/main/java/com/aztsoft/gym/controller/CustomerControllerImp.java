@@ -8,8 +8,11 @@ package com.aztsoft.gym.controller;
 import com.aztsoft.gym.model.dao.CustomerDao;
 import com.aztsoft.gym.model.dao.CustomerDaoImp;
 import com.aztsoft.gym.model.dto.Customer;
+import com.aztsoft.gym.model.dto.CustomerRegistration;
 import com.aztsoft.gym.model.dto.Modality;
 import com.aztsoft.gym.view.CustomerForm;
+
+import java.util.UUID;
 
 /**
  *
@@ -17,24 +20,36 @@ import com.aztsoft.gym.view.CustomerForm;
  */
 public class CustomerControllerImp implements CustomerController {
 
+    private final CustomerDao customerDao;
     private final CustomerForm customerView;
-    private CustomerDao customerDao;
 
     public CustomerControllerImp(CustomerForm customerView) {
         this.customerView = customerView;
         customerDao = new CustomerDaoImp();
+        startView();
+    }
+    
+    private void startView(){
+        customerView.startView();
     }
     
     @Override
     public void postCustomer() {
-        customerDao.postCustomer(getDataClient());
+        customerDao.postCustomer(getRegistry());
     }
-    
+
+    private CustomerRegistration getRegistry(){
+        CustomerRegistration aRegistry = new CustomerRegistration();
+        aRegistry.setCustomer(getDataClient());
+        aRegistry.setRegistrationDate(customerView.lblDate.getText());
+        return aRegistry;
+    }
+
     private Customer getDataClient() {
             
         Customer client = new Customer();
+        client.setId(UUID.randomUUID().toString());
         client.setName(customerView.txtName.getText());
-        client.setSurnames(customerView.txtSurnames.getText());
         client.setAge(getAgeClient());
         client.setAddress(customerView.txaAddress.getText());
         assignPlan(client);
@@ -62,5 +77,5 @@ public class CustomerControllerImp implements CustomerController {
         }
         
     }
-    
+
 }

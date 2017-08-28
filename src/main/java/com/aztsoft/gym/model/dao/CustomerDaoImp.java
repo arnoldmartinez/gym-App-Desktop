@@ -6,6 +6,7 @@
 package com.aztsoft.gym.model.dao;
 
 import com.aztsoft.gym.model.dto.Customer;
+import com.aztsoft.gym.model.dto.CustomerRegistration;
 
 /**
  *
@@ -14,7 +15,7 @@ import com.aztsoft.gym.model.dto.Customer;
 public class CustomerDaoImp implements CustomerDao {
 
     @Override
-    public void postCustomer(Customer customer) {
+    public void postCustomer(CustomerRegistration customer) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

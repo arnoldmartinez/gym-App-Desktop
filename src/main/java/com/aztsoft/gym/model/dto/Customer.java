@@ -77,5 +77,9 @@ public class Customer {
     public void assignPlan(int typePlan){
         this.plan = typePlan;
     }
+
+    public int getPlan() {
+        return plan;
+    }
     
 }

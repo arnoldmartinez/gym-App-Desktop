@@ -12,5 +12,5 @@ import com.aztsoft.gym.model.dto.CustomerRegistration;
  * @author windows
  */
 public interface CustomerDao {
-    void postCustomer(CustomerRegistration customer);
+    void postCustomer(CustomerRegistration registry);
 }

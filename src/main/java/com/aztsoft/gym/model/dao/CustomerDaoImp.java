@@ -5,8 +5,13 @@
  */
 package com.aztsoft.gym.model.dao;
 
+import com.aztsoft.gym.model.connection.ConnectionJDBC;
+import com.aztsoft.gym.model.connection.ConnectionMySQL;
 import com.aztsoft.gym.model.dto.Customer;
 import com.aztsoft.gym.model.dto.CustomerRegistration;
+
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -14,9 +19,21 @@ import com.aztsoft.gym.model.dto.CustomerRegistration;
  */
 public class CustomerDaoImp implements CustomerDao {
 
+    private ConnectionJDBC connection;
+
+    public CustomerDaoImp(ConnectionJDBC connection) {
+        this.connection = connection;
+    }
+
     @Override
-    public void postCustomer(CustomerRegistration customer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    public void postCustomer(CustomerRegistration registry) {
+        try {
+            Statement statement = connection.getConnection().createStatement();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     
 }

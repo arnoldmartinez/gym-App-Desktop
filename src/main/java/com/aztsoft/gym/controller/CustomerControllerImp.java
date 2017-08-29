@@ -5,6 +5,7 @@
  */
 package com.aztsoft.gym.controller;
 
+import com.aztsoft.gym.model.connection.ConnectionMySQL;
 import com.aztsoft.gym.model.dao.CustomerDao;
 import com.aztsoft.gym.model.dao.CustomerDaoImp;
 import com.aztsoft.gym.model.dto.Customer;
@@ -25,7 +26,7 @@ public class CustomerControllerImp implements CustomerController {
 
     public CustomerControllerImp(CustomerForm customerView) {
         this.customerView = customerView;
-        customerDao = new CustomerDaoImp();
+        customerDao = new CustomerDaoImp(new ConnectionMySQL());
         startView();
     }
     

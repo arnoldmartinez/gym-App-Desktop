@@ -7,8 +7,12 @@ package com.aztsoft.gym.view;
 
 import com.aztsoft.gym.controller.CustomerController;
 import com.aztsoft.gym.controller.CustomerControllerImp;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -112,7 +116,7 @@ public class CustomerForm extends javax.swing.JFrame {
         pnlDataClientLayout.setVerticalGroup(
             pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDataClientLayout.createSequentialGroup()
-                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblRegistrationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
@@ -127,6 +131,11 @@ public class CustomerForm extends javax.swing.JFrame {
         );
 
         lblPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userIcon.png"))); // NOI18N
+        lblPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblPhotoMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlPhotoLayout = new javax.swing.GroupLayout(pnlPhoto);
         pnlPhoto.setLayout(pnlPhotoLayout);
@@ -308,6 +317,17 @@ public class CustomerForm extends javax.swing.JFrame {
         Date date = new Date();
         lblDate.setText(format.format(date));
     }//GEN-LAST:event_formWindowGainedFocus
+
+    private void lblPhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPhotoMouseClicked
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Image", "jpg", "gif"); 
+        JFileChooser imageChooser = new JFileChooser();
+        imageChooser.setFileFilter(filter);
+        int result = imageChooser.showOpenDialog(this);
+        if(result == JFileChooser.CANCEL_OPTION) return;
+        File file = imageChooser.getSelectedFile();
+        ImageIcon imageIcon = new ImageIcon(file.getPath());
+        lblPhoto.setIcon(imageIcon);
+    }//GEN-LAST:event_lblPhotoMouseClicked
 
     /**
      * @param args the command line arguments

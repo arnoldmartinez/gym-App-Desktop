@@ -7,9 +7,17 @@ package com.aztsoft.gym.view;
 
 import com.aztsoft.gym.controller.CustomerController;
 import com.aztsoft.gym.controller.CustomerControllerImp;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -21,7 +29,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class CustomerForm extends javax.swing.JFrame {
 
     private final CustomerController customerController;
-   
+
     /**
      * Creates new form ClientForm
      */
@@ -150,7 +158,7 @@ public class CustomerForm extends javax.swing.JFrame {
             pnlPhotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPhotoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblPhoto)
+                .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -277,9 +285,9 @@ public class CustomerForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlDataClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlDataClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -319,14 +327,25 @@ public class CustomerForm extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void lblPhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPhotoMouseClicked
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Image", "jpg", "gif"); 
+
         JFileChooser imageChooser = new JFileChooser();
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Image", "jpg", "gif");
         imageChooser.setFileFilter(filter);
+
         int result = imageChooser.showOpenDialog(this);
-        if(result == JFileChooser.CANCEL_OPTION) return;
+        if (result == JFileChooser.CANCEL_OPTION) {
+            return;
+        }
         File file = imageChooser.getSelectedFile();
+    
         ImageIcon imageIcon = new ImageIcon(file.getPath());
-        lblPhoto.setIcon(imageIcon);
+        Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+        lblPhoto.setIcon(new ImageIcon(image));
+
+        
+
+
     }//GEN-LAST:event_lblPhotoMouseClicked
 
     /**
@@ -390,8 +409,8 @@ public class CustomerForm extends javax.swing.JFrame {
     public javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 
-    public void startView(){
+    public void startView() {
         initComponents();
     }
-    
+
 }

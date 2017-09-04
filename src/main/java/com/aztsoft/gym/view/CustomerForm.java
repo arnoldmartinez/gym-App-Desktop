@@ -7,17 +7,10 @@ package com.aztsoft.gym.view;
 
 import com.aztsoft.gym.controller.CustomerController;
 import com.aztsoft.gym.controller.CustomerControllerImp;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -29,7 +22,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class CustomerForm extends javax.swing.JFrame {
 
     private final CustomerController customerController;
-
+    private File imagePathFile = null;
     /**
      * Creates new form ClientForm
      */
@@ -334,17 +327,13 @@ public class CustomerForm extends javax.swing.JFrame {
         imageChooser.setFileFilter(filter);
 
         int result = imageChooser.showOpenDialog(this);
-        if (result == JFileChooser.CANCEL_OPTION) {
-            return;
-        }
-        File file = imageChooser.getSelectedFile();
+        if (result == JFileChooser.CANCEL_OPTION) return;
+        
+        imagePathFile = imageChooser.getSelectedFile();
     
-        ImageIcon imageIcon = new ImageIcon(file.getPath());
+        ImageIcon imageIcon = new ImageIcon(imagePathFile.getPath());
         Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
         lblPhoto.setIcon(new ImageIcon(image));
-
-        
-
 
     }//GEN-LAST:event_lblPhotoMouseClicked
 

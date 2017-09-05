@@ -5,14 +5,14 @@
  */
 package com.aztsoft.gym.controller;
 
-import com.aztsoft.gym.model.connection.ConnectionMySQL;
-import com.aztsoft.gym.model.dao.CustomerDao;
-import com.aztsoft.gym.model.dao.CustomerDaoImp;
-import com.aztsoft.gym.model.dto.Customer;
-import com.aztsoft.gym.model.dto.CustomerRegistration;
+import com.aztsoft.gym.persistence.connection.ConnectionMySQL;
+import com.aztsoft.gym.persistence.dao.CustomerDao;
+import com.aztsoft.gym.persistence.dao.CustomerDaoImp;
+import com.aztsoft.gym.domain.Customer;
+import com.aztsoft.gym.domain.CustomerRegistration;
+import com.aztsoft.gym.service.CustomerService;
+import com.aztsoft.gym.service.CustomerServiceImp;
 import com.aztsoft.gym.view.CustomerForm;
-
-import java.util.UUID;
 
 
 /**
@@ -21,12 +21,12 @@ import java.util.UUID;
  */
 public class CustomerControllerImp implements CustomerController {
 
-    private final CustomerDao customerDao;
+    private CustomerService customerService;
     private final CustomerForm customerView;
 
     public CustomerControllerImp(CustomerForm customerView) {
         this.customerView = customerView;
-        customerDao = new CustomerDaoImp(new ConnectionMySQL(), customerView);
+        customerService = new CustomerServiceImp(customerView);
         startView();
     }
 
@@ -36,7 +36,7 @@ public class CustomerControllerImp implements CustomerController {
 
     @Override
     public void postCustomer() {
-        customerDao.postCustomer(getRegistry());
+        customerService.postCustomer(getRegistry());
         customerView.cleanFields();
     }
 
@@ -50,7 +50,6 @@ public class CustomerControllerImp implements CustomerController {
     private Customer getDataClient() {
 
         Customer client = new Customer();
-        client.setId(UUID.randomUUID().toString());
         client.setName(customerView.txtName.getText());
         client.setAge(getAgeClient());
         client.setAddress(customerView.txaAddress.getText());

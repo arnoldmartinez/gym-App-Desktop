@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.aztsoft.gym.model.dao;
+package com.aztsoft.gym.persistence.dao;
 
-import com.aztsoft.gym.model.dto.CustomerRegistration;
+import com.aztsoft.gym.domain.CustomerRegistration;
 
 /**
  *

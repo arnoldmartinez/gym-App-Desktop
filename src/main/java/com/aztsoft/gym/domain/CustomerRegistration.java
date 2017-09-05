@@ -1,4 +1,4 @@
-package com.aztsoft.gym.model.dto;
+package com.aztsoft.gym.domain;
 
 /**
  * Created by vmuser on 28/08/17.

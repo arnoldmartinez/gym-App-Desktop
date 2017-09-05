@@ -1,4 +1,4 @@
-package com.aztsoft.gym.model.connection;
+package com.aztsoft.gym.persistence.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

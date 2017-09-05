@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.aztsoft.gym.model.dto;
+package com.aztsoft.gym.domain;
 
 import java.io.FileInputStream;
+import java.util.UUID;
 
 /**
  * @author arnold9108@gmail.com
@@ -19,18 +20,15 @@ public class Customer {
     private String plan;
     private FileInputStream photo;
 
+    public Customer() {
+        this.id = UUID.randomUUID().toString();
+    }
+
     /**
      * @return the id
      */
     public String getId() {
         return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(String id) {
-        this.id = id;
     }
 
     /**

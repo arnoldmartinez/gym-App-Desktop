@@ -7,21 +7,25 @@ package com.aztsoft.gym.model.dao;
 
 import com.aztsoft.gym.model.connection.ConnectionJDBC;
 import com.aztsoft.gym.model.dto.CustomerRegistration;
+import com.aztsoft.gym.view.CustomerForm;
+
+import javax.swing.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
- *
  * @author arnold9108@gmail.com
  */
 public class CustomerDaoImp implements CustomerDao {
 
     private Connection connection;
+    private CustomerForm CustomerView;
 
-    public CustomerDaoImp(ConnectionJDBC connectionJDBC) {
+    public CustomerDaoImp(ConnectionJDBC connectionJDBC, CustomerForm customerView) {
         setConnection(connectionJDBC.getConnection());
+        setCustomerView(customerView);
     }
 
     @Override
@@ -40,10 +44,12 @@ public class CustomerDaoImp implements CustomerDao {
             customerStatement.setString(2, registry.getCustomer().getName());
             customerStatement.setInt(3, registry.getCustomer().getAge());
             customerStatement.setString(4, registry.getCustomer().getAddress());
-            customerStatement.setInt(5, registry.getCustomer().getPlan());
-            customerStatement.setBinaryStream(6, registry.getCustomer().getPhoto(), registry.getCustomer().getPhoto().available());
+            customerStatement.setString(5, registry.getCustomer().getPlan());
 
-            customerStatement.execute();
+            if (registry.getCustomer().getPhoto() != null)
+                customerStatement.setBinaryStream(6, registry.getCustomer().getPhoto(), registry.getCustomer().getPhoto().available());
+            else
+                customerStatement.setBinaryStream(6, null);
 
             String insertRegistry = "INSERT INTO CUSTOMER_REGISTRATION(REGISTRATION_DATE, ID_CUSTOMER) VALUES(?,?)";
             registryStatement = getConnection().prepareStatement(insertRegistry);
@@ -51,12 +57,17 @@ public class CustomerDaoImp implements CustomerDao {
             registryStatement.setString(1, registry.getRegistrationDate());
             registryStatement.setString(2, registry.getCustomer().getId());
 
-            registryStatement.executeUpdate();
+            int customerRegitryAffected = customerStatement.executeUpdate();
+            int registryRowAffected = registryStatement.executeUpdate();
+
+            if(customerRegitryAffected == 1 & registryRowAffected  == 1)
+                getCustomerView().showMessage("CLIENTE AGREGADO CON EXITO!", "EXITOSAMENTE!", JOptionPane.PLAIN_MESSAGE);
 
             getConnection().commit();
+
         } catch (SQLException e) {
             e.printStackTrace();
-            if(getConnection() != null) {
+            if (getConnection() != null) {
                 try {
                     getConnection().rollback();
                 } catch (SQLException e1) {
@@ -73,7 +84,7 @@ public class CustomerDaoImp implements CustomerDao {
                     e.getCause();
                 }
             }
-            if(registryStatement != null){
+            if (registryStatement != null) {
                 try {
                     registryStatement.close();
                 } catch (SQLException e) {
@@ -89,5 +100,13 @@ public class CustomerDaoImp implements CustomerDao {
 
     private void setConnection(Connection connection) {
         this.connection = connection;
+    }
+
+    private CustomerForm getCustomerView() {
+        return CustomerView;
+    }
+
+    private void setCustomerView(CustomerForm customerView) {
+        CustomerView = customerView;
     }
 }

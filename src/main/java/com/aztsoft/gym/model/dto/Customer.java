@@ -16,7 +16,7 @@ public class Customer {
     private String name;
     private int age;
     private String address;
-    private int plan;
+    private String plan;
     private FileInputStream photo;
 
     /**
@@ -75,15 +75,11 @@ public class Customer {
         this.address = address;
     }
 
-    public void assignPlan(int typePlan) {
-        this.plan = typePlan;
-    }
-
-    public int getPlan() {
+    public String getPlan() {
         return plan;
     }
 
-    public void setPlan(int plan) {
+    public void setPlan(String plan) {
         this.plan = plan;
     }
 

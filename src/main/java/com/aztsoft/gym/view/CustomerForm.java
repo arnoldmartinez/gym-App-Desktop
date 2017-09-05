@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -27,7 +28,7 @@ public class CustomerForm extends javax.swing.JFrame {
 
     private final CustomerController customerController;
     public FileInputStream imageBlob = null;
-    
+
     /**
      * Creates new form ClientForm
      */
@@ -49,25 +50,25 @@ public class CustomerForm extends javax.swing.JFrame {
         txtName = new javax.swing.JTextField();
         lblAge = new javax.swing.JLabel();
         txtAge = new javax.swing.JTextField();
+        pnlPhoto = new javax.swing.JPanel();
+        pnlHeader = new javax.swing.JPanel();
+        pnlTittle = new javax.swing.JPanel();
+        lblTittle = new javax.swing.JLabel();
         lblRegistrationDate = new javax.swing.JLabel();
         lblDate = new javax.swing.JLabel();
-        pnlPhoto = new javax.swing.JPanel();
-        lblPhoto = new javax.swing.JLabel();
         pnlAddress = new javax.swing.JPanel();
         lblAddress = new javax.swing.JLabel();
         srcAddress = new javax.swing.JScrollPane();
         txaAddress = new javax.swing.JTextArea();
         pnlContractDetail = new javax.swing.JPanel();
         lblTypeRenter = new javax.swing.JLabel();
-        radVisit = new javax.swing.JRadioButton();
-        radBiweekly = new javax.swing.JRadioButton();
-        radWeekly = new javax.swing.JRadioButton();
-        radMonthly = new javax.swing.JRadioButton();
-        radAnnual = new javax.swing.JRadioButton();
+        cmbPlan = new javax.swing.JComboBox<>();
         pnlCommand = new javax.swing.JPanel();
         btnPostClient = new javax.swing.JButton();
+        lblPhoto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(102, 102, 102));
         setResizable(false);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
@@ -94,55 +95,91 @@ public class CustomerForm extends javax.swing.JFrame {
             }
         });
 
-        lblRegistrationDate.setText("Fecha de registro:");
-
         javax.swing.GroupLayout pnlDataClientLayout = new javax.swing.GroupLayout(pnlDataClient);
         pnlDataClient.setLayout(pnlDataClientLayout);
         pnlDataClientLayout.setHorizontalGroup(
             pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDataClientLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlDataClientLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
                         .addComponent(lblAge)
-                        .addGap(26, 26, 26)
-                        .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnlDataClientLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(lblname)
                         .addGap(18, 18, 18)
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(138, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDataClientLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblRegistrationDate)
-                .addGap(18, 18, 18)
-                .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                        .addComponent(txtName)))
+                .addContainerGap())
         );
         pnlDataClientLayout.setVerticalGroup(
             pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDataClientLayout.createSequentialGroup()
-                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblRegistrationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblname))
-                .addGap(18, 18, 18)
-                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAge)
-                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAge))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
-        lblPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userIcon.png"))); // NOI18N
-        lblPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblPhotoMouseClicked(evt);
-            }
-        });
+        pnlHeader.setBackground(new java.awt.Color(0, 51, 153));
+
+        pnlTittle.setBackground(new java.awt.Color(0, 51, 153));
+
+        lblTittle.setFont(new java.awt.Font("DejaVu Sans Mono", 1, 18)); // NOI18N
+        lblTittle.setText("REGISTRO DE CILENTE");
+
+        lblRegistrationDate.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
+        lblRegistrationDate.setText("Fecha de registro:");
+
+        lblDate.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
+
+        javax.swing.GroupLayout pnlTittleLayout = new javax.swing.GroupLayout(pnlTittle);
+        pnlTittle.setLayout(pnlTittleLayout);
+        pnlTittleLayout.setHorizontalGroup(
+            pnlTittleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTittleLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblRegistrationDate)
+                .addGap(18, 18, 18)
+                .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(pnlTittleLayout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(lblTittle)
+                .addContainerGap(156, Short.MAX_VALUE))
+        );
+        pnlTittleLayout.setVerticalGroup(
+            pnlTittleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTittleLayout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(lblTittle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlTittleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblRegistrationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
+        pnlHeader.setLayout(pnlHeaderLayout);
+        pnlHeaderLayout.setHorizontalGroup(
+            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlHeaderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlTittle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnlHeaderLayout.setVerticalGroup(
+            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlHeaderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlTittle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout pnlPhotoLayout = new javax.swing.GroupLayout(pnlPhoto);
         pnlPhoto.setLayout(pnlPhotoLayout);
@@ -150,15 +187,14 @@ public class CustomerForm extends javax.swing.JFrame {
             pnlPhotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPhotoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblPhoto)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlPhotoLayout.setVerticalGroup(
             pnlPhotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPhotoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         lblAddress.setText("Dirección:");
@@ -178,32 +214,24 @@ public class CustomerForm extends javax.swing.JFrame {
             pnlAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAddressLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblAddress)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(srcAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(369, 369, 369))
+                .addGroup(pnlAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlAddressLayout.createSequentialGroup()
+                        .addComponent(lblAddress)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(srcAddress))
+                .addContainerGap())
         );
         pnlAddressLayout.setVerticalGroup(
             pnlAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAddressLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(srcAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAddress))
+                .addComponent(lblAddress)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(srcAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         lblTypeRenter.setText("Tipo de renta:");
-
-        radVisit.setText("visita");
-
-        radBiweekly.setText("Quincenal");
-
-        radWeekly.setText("Semanal");
-
-        radMonthly.setText("Mensual");
-
-        radAnnual.setText("Anual");
 
         javax.swing.GroupLayout pnlContractDetailLayout = new javax.swing.GroupLayout(pnlContractDetail);
         pnlContractDetail.setLayout(pnlContractDetailLayout);
@@ -211,36 +239,19 @@ public class CustomerForm extends javax.swing.JFrame {
             pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContractDetailLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(radVisit)
-                    .addComponent(lblTypeRenter))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlContractDetailLayout.createSequentialGroup()
-                        .addComponent(radWeekly)
-                        .addGap(18, 18, 18)
-                        .addComponent(radBiweekly))
-                    .addGroup(pnlContractDetailLayout.createSequentialGroup()
-                        .addComponent(radMonthly)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(radAnnual)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblTypeRenter)
+                    .addComponent(cmbPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(301, Short.MAX_VALUE))
         );
         pnlContractDetailLayout.setVerticalGroup(
             pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContractDetailLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTypeRenter)
-                .addGap(21, 21, 21)
-                .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radVisit)
-                    .addComponent(radWeekly)
-                    .addComponent(radBiweekly))
-                .addGap(18, 18, 18)
-                .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radMonthly)
-                    .addComponent(radAnnual))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbPlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnPostClient.setText("Agregar");
@@ -256,16 +267,23 @@ public class CustomerForm extends javax.swing.JFrame {
             pnlCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCommandLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnPostClient)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnPostClient, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(375, Short.MAX_VALUE))
         );
         pnlCommandLayout.setVerticalGroup(
             pnlCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCommandLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(btnPostClient, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(btnPostClient, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        lblPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userIcon.png"))); // NOI18N
+        lblPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblPhotoMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -274,29 +292,38 @@ public class CustomerForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlCommand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnlPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(pnlDataClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(pnlContractDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(pnlAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnlAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(pnlContractDetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(pnlPhoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblPhoto)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(pnlDataClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(pnlCommand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 6, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(pnlPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlDataClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlContractDetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                    .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlDataClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlContractDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlCommand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -322,9 +349,10 @@ public class CustomerForm extends javax.swing.JFrame {
             getToolkit().beep();
             evt.consume();
         }
-        if(Character.isLowerCase(keyType))
+        if (Character.isLowerCase(keyType)) {
             evt.setKeyChar(Character.toUpperCase(keyType));
-        
+        }
+
     }//GEN-LAST:event_txtNameKeyTyped
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
@@ -341,15 +369,17 @@ public class CustomerForm extends javax.swing.JFrame {
         imageChooser.setFileFilter(filter);
 
         int result = imageChooser.showOpenDialog(this);
-        if (result == JFileChooser.CANCEL_OPTION) return;
-        
+        if (result == JFileChooser.CANCEL_OPTION) {
+            return;
+        }
+
         File imagePathFile = imageChooser.getSelectedFile();
         try {
             imageBlob = new FileInputStream(imagePathFile);
         } catch (IOException ex) {
             Logger.getLogger(CustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         ImageIcon imageIcon = new ImageIcon(imagePathFile.getPath());
         Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
         lblPhoto.setIcon(new ImageIcon(image));
@@ -358,8 +388,9 @@ public class CustomerForm extends javax.swing.JFrame {
 
     private void txaAddressKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaAddressKeyTyped
         char keyType = evt.getKeyChar();
-        if(Character.isLowerCase(keyType))
+        if (Character.isLowerCase(keyType)) {
             evt.setKeyChar(Character.toUpperCase(keyType));
+        }
     }//GEN-LAST:event_txaAddressKeyTyped
 
     /**
@@ -400,23 +431,22 @@ public class CustomerForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPostClient;
+    public javax.swing.JComboBox<String> cmbPlan;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblAge;
     public javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblPhoto;
     private javax.swing.JLabel lblRegistrationDate;
+    private javax.swing.JLabel lblTittle;
     private javax.swing.JLabel lblTypeRenter;
     private javax.swing.JLabel lblname;
     private javax.swing.JPanel pnlAddress;
     private javax.swing.JPanel pnlCommand;
     private javax.swing.JPanel pnlContractDetail;
     private javax.swing.JPanel pnlDataClient;
+    private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlPhoto;
-    public javax.swing.JRadioButton radAnnual;
-    public javax.swing.JRadioButton radBiweekly;
-    public javax.swing.JRadioButton radMonthly;
-    public javax.swing.JRadioButton radVisit;
-    public javax.swing.JRadioButton radWeekly;
+    private javax.swing.JPanel pnlTittle;
     private javax.swing.JScrollPane srcAddress;
     public javax.swing.JTextArea txaAddress;
     public javax.swing.JTextField txtAge;
@@ -425,6 +455,27 @@ public class CustomerForm extends javax.swing.JFrame {
 
     public void startView() {
         initComponents();
+        loadItemPlan();
+    }
+
+    private void loadItemPlan() {
+        cmbPlan.addItem("VISITA");
+        cmbPlan.addItem("SEMANA");
+        cmbPlan.addItem("QUINCENA");
+        cmbPlan.addItem("MES");
+        cmbPlan.addItem("AÑO");
+    }
+
+    public void cleanFields() {
+        lblPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userIcon.png")));
+        txtName.setText("");
+        txtAge.setText("");
+        txaAddress.setText("");
+        cmbPlan.getItemAt(0);
+    }
+
+    public void showMessage(String aMessage, String tittle, int typeMessage) {
+        JOptionPane.showMessageDialog(this, aMessage, tittle, typeMessage);
     }
 
 }

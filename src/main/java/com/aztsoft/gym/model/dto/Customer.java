@@ -5,17 +5,19 @@
  */
 package com.aztsoft.gym.model.dto;
 
+import java.io.FileInputStream;
+
 /**
- *
- * @author Arnold Martinez
+ * @author arnold9108@gmail.com
  */
 public class Customer {
-    
+
     private String id;
     private String name;
     private int age;
     private String address;
     private int plan;
+    private FileInputStream photo;
 
     /**
      * @return the id
@@ -30,7 +32,7 @@ public class Customer {
     public void setId(String id) {
         this.id = id;
     }
-    
+
     /**
      * @return the name
      */
@@ -72,14 +74,25 @@ public class Customer {
     public void setAddress(String address) {
         this.address = address;
     }
-    
-    
-    public void assignPlan(int typePlan){
+
+    public void assignPlan(int typePlan) {
         this.plan = typePlan;
     }
 
     public int getPlan() {
         return plan;
     }
-    
+
+    public void setPlan(int plan) {
+        this.plan = plan;
+    }
+
+    public FileInputStream getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(FileInputStream photo) {
+        this.photo = photo;
+    }
+
 }

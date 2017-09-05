@@ -7,7 +7,7 @@ package com.aztsoft.gym.model.dao;
 
 import com.aztsoft.gym.model.connection.ConnectionJDBC;
 import com.aztsoft.gym.model.dto.CustomerRegistration;
-
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -33,7 +33,7 @@ public class CustomerDaoImp implements CustomerDao {
 
             getConnection().setAutoCommit(false);
 
-            String insertCustomer = "INSERT INTO CUSTOMER(ID, NAME, AGE, ADDRESS, PLAN) VALUES(?,?,?,?,?)";
+            String insertCustomer = "INSERT INTO CUSTOMER(ID, NAME, AGE, ADDRESS, PLAN, IMAGE) VALUES(?,?,?,?,?,?)";
             customerStatement = getConnection().prepareStatement(insertCustomer);
 
             customerStatement.setString(1, registry.getCustomer().getId());
@@ -41,6 +41,7 @@ public class CustomerDaoImp implements CustomerDao {
             customerStatement.setInt(3, registry.getCustomer().getAge());
             customerStatement.setString(4, registry.getCustomer().getAddress());
             customerStatement.setInt(5, registry.getCustomer().getPlan());
+            customerStatement.setBinaryStream(6, registry.getCustomer().getPhoto(), registry.getCustomer().getPhoto().available());
 
             customerStatement.execute();
 
@@ -50,7 +51,7 @@ public class CustomerDaoImp implements CustomerDao {
             registryStatement.setString(1, registry.getRegistrationDate());
             registryStatement.setString(2, registry.getCustomer().getId());
 
-            registryStatement.execute();
+            registryStatement.executeUpdate();
 
             getConnection().commit();
         } catch (SQLException e) {
@@ -62,6 +63,8 @@ public class CustomerDaoImp implements CustomerDao {
                     e1.getCause();
                 }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         } finally {
             if (customerStatement != null) {
                 try {

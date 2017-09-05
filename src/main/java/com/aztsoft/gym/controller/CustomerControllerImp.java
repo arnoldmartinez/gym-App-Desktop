@@ -54,6 +54,7 @@ public class CustomerControllerImp implements CustomerController {
         client.setAge(getAgeClient());
         client.setAddress(customerView.txaAddress.getText());
         assignPlan(client);
+        client.setPhoto(customerView.imageBlob);
             
         return client;
     }

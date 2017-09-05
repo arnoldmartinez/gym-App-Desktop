@@ -68,6 +68,7 @@ public class CustomerForm extends javax.swing.JFrame {
         btnPostClient = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -164,6 +165,11 @@ public class CustomerForm extends javax.swing.JFrame {
 
         txaAddress.setColumns(20);
         txaAddress.setRows(5);
+        txaAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txaAddressKeyTyped(evt);
+            }
+        });
         srcAddress.setViewportView(txaAddress);
 
         javax.swing.GroupLayout pnlAddressLayout = new javax.swing.GroupLayout(pnlAddress);
@@ -311,11 +317,14 @@ public class CustomerForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAgeKeyTyped
 
     private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
-        char digitTyped = evt.getKeyChar();
-        if (Character.isDigit(digitTyped)) {
+        char keyType = evt.getKeyChar();
+        if (Character.isDigit(keyType)) {
             getToolkit().beep();
             evt.consume();
         }
+        if(Character.isLowerCase(keyType))
+            evt.setKeyChar(Character.toUpperCase(keyType));
+        
     }//GEN-LAST:event_txtNameKeyTyped
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
@@ -346,6 +355,12 @@ public class CustomerForm extends javax.swing.JFrame {
         lblPhoto.setIcon(new ImageIcon(image));
 
     }//GEN-LAST:event_lblPhotoMouseClicked
+
+    private void txaAddressKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaAddressKeyTyped
+        char keyType = evt.getKeyChar();
+        if(Character.isLowerCase(keyType))
+            evt.setKeyChar(Character.toUpperCase(keyType));
+    }//GEN-LAST:event_txaAddressKeyTyped
 
     /**
      * @param args the command line arguments

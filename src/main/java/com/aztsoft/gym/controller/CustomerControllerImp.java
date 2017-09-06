@@ -5,9 +5,6 @@
  */
 package com.aztsoft.gym.controller;
 
-import com.aztsoft.gym.persistence.connection.ConnectionMySQL;
-import com.aztsoft.gym.persistence.dao.CustomerDao;
-import com.aztsoft.gym.persistence.dao.CustomerDaoImp;
 import com.aztsoft.gym.domain.Customer;
 import com.aztsoft.gym.domain.CustomerRegistration;
 import com.aztsoft.gym.service.CustomerService;
@@ -37,7 +34,6 @@ public class CustomerControllerImp implements CustomerController {
     @Override
     public void postCustomer() {
         customerService.postCustomer(getRegistry());
-        customerView.cleanFields();
     }
 
     private CustomerRegistration getRegistry() {
@@ -60,6 +56,8 @@ public class CustomerControllerImp implements CustomerController {
     }
 
     private int getAgeClient() {
+        if(customerView.txtAge.getText().equals(""))
+            return 0;
         return new Integer(customerView.txtAge.getText());
     }
 

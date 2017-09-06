@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author arnold9108@gmail.com
@@ -60,9 +62,10 @@ public class CustomerDaoImp implements CustomerDao {
             int customerRegitryAffected = customerStatement.executeUpdate();
             int registryRowAffected = registryStatement.executeUpdate();
 
-            if(customerRegitryAffected == 1 & registryRowAffected  == 1)
+            if(customerRegitryAffected == 1 & registryRowAffected  == 1) {
                 getCustomerView().showMessage("CLIENTE AGREGADO CON EXITO!", "EXITOSAMENTE!", JOptionPane.PLAIN_MESSAGE);
-
+                getCustomerView().hideFieldRequiredName();
+            }
             getConnection().commit();
 
         } catch (SQLException e) {
@@ -90,6 +93,11 @@ public class CustomerDaoImp implements CustomerDao {
                 } catch (SQLException e) {
                     e.getCause();
                 }
+            }
+            try {
+                getConnection().setAutoCommit(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(CustomerDaoImp.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

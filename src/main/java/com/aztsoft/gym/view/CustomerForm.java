@@ -34,6 +34,7 @@ public class CustomerForm extends javax.swing.JFrame {
      */
     public CustomerForm() {
         customerController = new CustomerControllerImp(this);
+        hideFieldRequiredName();
     }
 
     /**
@@ -50,12 +51,12 @@ public class CustomerForm extends javax.swing.JFrame {
         txtName = new javax.swing.JTextField();
         lblAge = new javax.swing.JLabel();
         txtAge = new javax.swing.JTextField();
-        pnlPhoto = new javax.swing.JPanel();
-        lblPhoto = new javax.swing.JLabel();
-        pnlAddress = new javax.swing.JPanel();
         lblAddress = new javax.swing.JLabel();
         srcAddress = new javax.swing.JScrollPane();
         txaAddress = new javax.swing.JTextArea();
+        lblnameRequired = new javax.swing.JLabel();
+        pnlPhoto = new javax.swing.JPanel();
+        lblPhoto = new javax.swing.JLabel();
         pnlContractDetail = new javax.swing.JPanel();
         lblTypeRenter = new javax.swing.JLabel();
         cmbPlan = new javax.swing.JComboBox<>();
@@ -97,6 +98,20 @@ public class CustomerForm extends javax.swing.JFrame {
             }
         });
 
+        lblAddress.setText("Dirección:");
+
+        txaAddress.setColumns(20);
+        txaAddress.setRows(5);
+        txaAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txaAddressKeyTyped(evt);
+            }
+        });
+        srcAddress.setViewportView(txaAddress);
+
+        lblnameRequired.setForeground(new java.awt.Color(255, 0, 0));
+        lblnameRequired.setText("*");
+
         javax.swing.GroupLayout pnlDataClientLayout = new javax.swing.GroupLayout(pnlDataClient);
         pnlDataClient.setLayout(pnlDataClientLayout);
         pnlDataClientLayout.setHorizontalGroup(
@@ -104,15 +119,16 @@ public class CustomerForm extends javax.swing.JFrame {
             .addGroup(pnlDataClientLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDataClientLayout.createSequentialGroup()
-                        .addComponent(lblAge)
-                        .addGap(34, 34, 34)
-                        .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlDataClientLayout.createSequentialGroup()
-                        .addComponent(lblname)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtName)))
+                    .addComponent(lblname)
+                    .addComponent(lblAge)
+                    .addComponent(lblAddress))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtName)
+                    .addComponent(srcAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblnameRequired, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         pnlDataClientLayout.setVerticalGroup(
@@ -121,12 +137,19 @@ public class CustomerForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblname))
+                    .addComponent(lblname)
+                    .addComponent(lblnameRequired))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAge)
+                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAge))
-                .addContainerGap(56, Short.MAX_VALUE))
+                    .addGroup(pnlDataClientLayout.createSequentialGroup()
+                        .addComponent(lblAddress)
+                        .addGap(0, 41, Short.MAX_VALUE))
+                    .addComponent(srcAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         lblPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userIcon.png"))); // NOI18N
@@ -157,42 +180,6 @@ public class CustomerForm extends javax.swing.JFrame {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        pnlAddress.setBackground(new java.awt.Color(153, 153, 153));
-
-        lblAddress.setText("Dirección:");
-
-        txaAddress.setColumns(20);
-        txaAddress.setRows(5);
-        txaAddress.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txaAddressKeyTyped(evt);
-            }
-        });
-        srcAddress.setViewportView(txaAddress);
-
-        javax.swing.GroupLayout pnlAddressLayout = new javax.swing.GroupLayout(pnlAddress);
-        pnlAddress.setLayout(pnlAddressLayout);
-        pnlAddressLayout.setHorizontalGroup(
-            pnlAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAddressLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlAddressLayout.createSequentialGroup()
-                        .addComponent(lblAddress)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(srcAddress))
-                .addContainerGap())
-        );
-        pnlAddressLayout.setVerticalGroup(
-            pnlAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAddressLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblAddress)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(srcAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         pnlContractDetail.setBackground(new java.awt.Color(153, 153, 153));
 
         lblTypeRenter.setText("Tipo de renta:");
@@ -204,9 +191,12 @@ public class CustomerForm extends javax.swing.JFrame {
             .addGroup(pnlContractDetailLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTypeRenter)
-                    .addComponent(cmbPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlContractDetailLayout.createSequentialGroup()
+                        .addComponent(cmbPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlContractDetailLayout.createSequentialGroup()
+                        .addComponent(lblTypeRenter)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnlContractDetailLayout.setVerticalGroup(
             pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,7 +262,7 @@ public class CustomerForm extends javax.swing.JFrame {
             .addGroup(pnlTittleLayout.createSequentialGroup()
                 .addGap(137, 137, 137)
                 .addComponent(lblTittle)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlTittleLayout.setVerticalGroup(
             pnlTittleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,7 +303,6 @@ public class CustomerForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pnlDataClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlContractDetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlCommand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -327,9 +316,7 @@ public class CustomerForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlDataClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlContractDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlCommand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -448,7 +435,7 @@ public class CustomerForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblTittle;
     private javax.swing.JLabel lblTypeRenter;
     private javax.swing.JLabel lblname;
-    private javax.swing.JPanel pnlAddress;
+    private javax.swing.JLabel lblnameRequired;
     private javax.swing.JPanel pnlCommand;
     private javax.swing.JPanel pnlContractDetail;
     private javax.swing.JPanel pnlDataClient;
@@ -486,4 +473,11 @@ public class CustomerForm extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, aMessage, tittle, typeMessage);
     }
 
+    public void showFieldRequiredName(){
+        lblnameRequired.setVisible(true);
+    }
+    
+    public void hideFieldRequiredName(){
+        lblnameRequired.setVisible(false);
+    }
 }

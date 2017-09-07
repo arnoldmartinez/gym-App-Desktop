@@ -59,46 +59,54 @@ public class CustomerDaoImp implements CustomerDao {
             registryStatement.setString(1, registry.getRegistrationDate());
             registryStatement.setString(2, registry.getCustomer().getId());
 
-            int customerRegitryAffected = customerStatement.executeUpdate();
+            int customerRegistryAffected = customerStatement.executeUpdate();
             int registryRowAffected = registryStatement.executeUpdate();
 
-            if(customerRegitryAffected == 1 & registryRowAffected  == 1) {
+            if(customerRegistryAffected == 1 & registryRowAffected  == 1) {
                 getCustomerView().showMessage("CLIENTE AGREGADO CON EXITO!", "EXITOSAMENTE!", JOptionPane.PLAIN_MESSAGE);
                 getCustomerView().hideFieldRequiredName();
+                getCustomerView().cleanFields();
             }
             getConnection().commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
             if (getConnection() != null) {
-                try {
-                    getConnection().rollback();
-                } catch (SQLException e1) {
-                    e1.getCause();
-                }
+                rollbackOperation();
+                getCustomerView().cleanFields();
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (customerStatement != null) {
-                try {
-                    customerStatement.close();
-                } catch (SQLException e) {
-                    e.getCause();
-                }
-            }
-            if (registryStatement != null) {
-                try {
-                    registryStatement.close();
-                } catch (SQLException e) {
-                    e.getCause();
-                }
-            }
+            closePrepareStatement(customerStatement);
+            closePrepareStatement(registryStatement);
+            setAutoCommit();
+        }
+    }
+
+    private void closePrepareStatement(PreparedStatement preparedStatement){
+        if (preparedStatement != null) {
             try {
-                getConnection().setAutoCommit(true);
-            } catch (SQLException ex) {
-                Logger.getLogger(CustomerDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.getCause();
             }
+        }
+    }
+
+    private void setAutoCommit(){
+        try {
+            getConnection().setAutoCommit(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void rollbackOperation(){
+        try {
+            getConnection().rollback();
+        } catch (SQLException e1) {
+            e1.getCause();
         }
     }
 

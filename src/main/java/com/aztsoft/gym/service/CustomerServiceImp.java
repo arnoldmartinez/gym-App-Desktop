@@ -31,7 +31,6 @@ public class CustomerServiceImp implements  CustomerService{
         }
         customerDao.postCustomer(registry);
         getCustomerView().hideFieldRequiredName();
-        getCustomerView().cleanFields();
     }
 
     private CustomerForm getCustomerView() {

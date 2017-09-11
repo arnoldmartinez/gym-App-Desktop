@@ -35,6 +35,7 @@ public class CustomerForm extends javax.swing.JFrame {
     public CustomerForm() {
         customerController = new CustomerControllerImp(this);
         hideFieldRequiredName();
+        disableLimitDateComponent();
     }
 
     /**
@@ -60,6 +61,8 @@ public class CustomerForm extends javax.swing.JFrame {
         pnlContractDetail = new javax.swing.JPanel();
         lblTypeRenter = new javax.swing.JLabel();
         cmbPlan = new javax.swing.JComboBox<>();
+        jdcLimitDate = new com.toedter.calendar.JDateChooser();
+        lblLimitDate = new javax.swing.JLabel();
         pnlCommand = new javax.swing.JPanel();
         btnPostClient = new javax.swing.JButton();
         pnlHeader = new javax.swing.JPanel();
@@ -127,9 +130,9 @@ public class CustomerForm extends javax.swing.JFrame {
                     .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtName)
                     .addComponent(srcAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblnameRequired, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         pnlDataClientLayout.setVerticalGroup(
             pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,6 +187,16 @@ public class CustomerForm extends javax.swing.JFrame {
 
         lblTypeRenter.setText("Tipo de renta:");
 
+        cmbPlan.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbPlanItemStateChanged(evt);
+            }
+        });
+
+        jdcLimitDate.setEnabled(false);
+
+        lblLimitDate.setText("Fecha limite:");
+
         javax.swing.GroupLayout pnlContractDetailLayout = new javax.swing.GroupLayout(pnlContractDetail);
         pnlContractDetail.setLayout(pnlContractDetailLayout);
         pnlContractDetailLayout.setHorizontalGroup(
@@ -191,20 +204,26 @@ public class CustomerForm extends javax.swing.JFrame {
             .addGroup(pnlContractDetailLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlContractDetailLayout.createSequentialGroup()
-                        .addComponent(cmbPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlContractDetailLayout.createSequentialGroup()
-                        .addComponent(lblTypeRenter)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(cmbPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTypeRenter))
+                .addGap(18, 18, 18)
+                .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLimitDate)
+                    .addComponent(jdcLimitDate, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlContractDetailLayout.setVerticalGroup(
             pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContractDetailLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTypeRenter)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbPlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jdcLimitDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlContractDetailLayout.createSequentialGroup()
+                        .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTypeRenter)
+                            .addComponent(lblLimitDate))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbPlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -298,12 +317,12 @@ public class CustomerForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlContractDetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pnlDataClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlContractDetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlCommand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -388,6 +407,26 @@ public class CustomerForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txaAddressKeyTyped
 
+    private void cmbPlanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPlanItemStateChanged
+        switch((String) cmbPlan.getSelectedItem()){
+            case "VISITA":
+                jdcLimitDate.setEnabled(false);
+                break;
+            case "SEMANA":
+                jdcLimitDate.setEnabled(true);
+              break;
+            case "QUINCENA":
+                jdcLimitDate.setEnabled(true);
+                break;
+            case "MES":
+                jdcLimitDate.setEnabled(true);
+                break;
+            case "AÑO":
+                jdcLimitDate.setEnabled(true);
+                break;
+        }
+    }//GEN-LAST:event_cmbPlanItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -427,9 +466,11 @@ public class CustomerForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPostClient;
     public javax.swing.JComboBox<String> cmbPlan;
+    public com.toedter.calendar.JDateChooser jdcLimitDate;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblAge;
     public javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblLimitDate;
     private javax.swing.JLabel lblPhoto;
     private javax.swing.JLabel lblRegistrationDate;
     private javax.swing.JLabel lblTittle;
@@ -479,5 +520,9 @@ public class CustomerForm extends javax.swing.JFrame {
     
     public void hideFieldRequiredName(){
         lblnameRequired.setVisible(false);
+    }
+
+    private void disableLimitDateComponent() {
+        jdcLimitDate.setDate(new Date());
     }
 }

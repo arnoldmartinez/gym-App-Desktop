@@ -7,6 +7,7 @@ public class CustomerRegistration {
 
     private String registrationDate;
     private Customer customer;
+    private String registrationLimit;
 
     public String getRegistrationDate() {
         return registrationDate;
@@ -22,5 +23,13 @@ public class CustomerRegistration {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public String getRegistrationLimit() {
+        return registrationLimit;
+    }
+
+    public void setRegistrationLimit(String registrationLimit) {
+        this.registrationLimit = registrationLimit;
     }
 }

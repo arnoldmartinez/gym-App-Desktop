@@ -10,7 +10,9 @@ import com.aztsoft.gym.domain.CustomerRegistration;
 import com.aztsoft.gym.service.CustomerService;
 import com.aztsoft.gym.service.CustomerServiceImp;
 import com.aztsoft.gym.view.CustomerForm;
+import com.toedter.calendar.JDateChooser;
 
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -18,10 +20,12 @@ import com.aztsoft.gym.view.CustomerForm;
  */
 public class CustomerControllerImp implements CustomerController {
 
-    private CustomerService customerService;
+    private static final int VISIT = 0;
+    private final CustomerService customerService;
     private final CustomerForm customerView;
 
     public CustomerControllerImp(CustomerForm customerView) {
+
         this.customerView = customerView;
         customerService = new CustomerServiceImp(customerView);
         startView();
@@ -33,32 +37,41 @@ public class CustomerControllerImp implements CustomerController {
 
     @Override
     public void postCustomer() {
-        customerService.postCustomer(getRegistry());
+        customerService.postCustomer(getDataRegistry());
     }
 
-    private CustomerRegistration getRegistry() {
+    private CustomerRegistration getDataRegistry() {
+
         CustomerRegistration aRegistry = new CustomerRegistration();
         aRegistry.setCustomer(getDataClient());
         aRegistry.setRegistrationDate(customerView.lblDate.getText());
+
+        if(customerView.cmbPlan.getSelectedIndex() > VISIT)
+            aRegistry.setRegistrationLimit(getFormatDate(customerView.jdcLimitDate));
+
         return aRegistry;
     }
 
     private Customer getDataClient() {
 
-        Customer client = new Customer();
-        client.setName(customerView.txtName.getText());
-        client.setAge(getAgeClient());
-        client.setAddress(customerView.txaAddress.getText());
-        client.setPlan((String) customerView.cmbPlan.getSelectedItem());
-        client.setPhoto(customerView.imageBlob);
+        Customer aClient = new Customer();
+        aClient.setName(customerView.txtName.getText());
+        aClient.setAge(getAgeClient());
+        aClient.setAddress(customerView.txaAddress.getText());
+        aClient.setPlan((String) customerView.cmbPlan.getSelectedItem());
+        aClient.setPhoto(customerView.imageBlob);
 
-        return client;
+        return aClient;
     }
 
     private int getAgeClient() {
-        if(customerView.txtAge.getText().equals(""))
-            return 0;
-        return new Integer(customerView.txtAge.getText());
+        return customerView.txtAge.getText().equals("") ? 0 : new Integer(customerView.txtAge.getText());
+    }
+
+    private String getFormatDate(JDateChooser dateChooser){
+
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        return dateChooser == null ? null : format.format(dateChooser.getDate());
     }
 
 }

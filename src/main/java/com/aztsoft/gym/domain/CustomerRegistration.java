@@ -1,13 +1,14 @@
 package com.aztsoft.gym.domain;
 
 /**
- * Created by vmuser on 28/08/17.
+ * Created by arnold9108@gmail.com on 28/08/17.
  */
 public class CustomerRegistration {
 
     private String registrationDate;
     private Customer customer;
     private String registrationLimit;
+    private double cost;
 
     public String getRegistrationDate() {
         return registrationDate;
@@ -32,4 +33,13 @@ public class CustomerRegistration {
     public void setRegistrationLimit(String registrationLimit) {
         this.registrationLimit = registrationLimit;
     }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+    
 }

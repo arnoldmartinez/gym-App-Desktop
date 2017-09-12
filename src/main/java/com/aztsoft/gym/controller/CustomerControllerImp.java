@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 
 /**
  *
- * @author arnold9108@gmail.com
+ * @author arnold9108@gmail.com 11/09/2017
  */
 public class CustomerControllerImp implements CustomerController {
 
@@ -48,7 +48,8 @@ public class CustomerControllerImp implements CustomerController {
 
         if(customerView.cmbPlan.getSelectedIndex() > VISIT)
             aRegistry.setRegistrationLimit(getFormatDate(customerView.jdcLimitDate));
-
+        
+        aRegistry.setCost(new Double(customerView.txtCost.getText()));
         return aRegistry;
     }
 

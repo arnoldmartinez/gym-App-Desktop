@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,25 +41,27 @@ public class CustomerDaoImp implements CustomerDao {
 
             getConnection().setAutoCommit(false);
 
-            String insertCustomer = "INSERT INTO CUSTOMER(ID, NAME, AGE, ADDRESS, PLAN, IMAGE) VALUES(?,?,?,?,?,?)";
+            String insertCustomer = "INSERT INTO CUSTOMER(ID, NAME, AGE, ADDRESS, IMAGE) VALUES(?,?,?,?,?)";
             customerStatement = getConnection().prepareStatement(insertCustomer);
 
             customerStatement.setString(1, registry.getCustomer().getId());
             customerStatement.setString(2, registry.getCustomer().getName());
             customerStatement.setInt(3, registry.getCustomer().getAge());
             customerStatement.setString(4, registry.getCustomer().getAddress());
-            customerStatement.setString(5, registry.getCustomer().getPlan());
 
             if (registry.getCustomer().getPhoto() != null)
-                customerStatement.setBinaryStream(6, registry.getCustomer().getPhoto(), registry.getCustomer().getPhoto().available());
+                customerStatement.setBinaryStream(5, registry.getCustomer().getPhoto(), registry.getCustomer().getPhoto().available());
             else
-                customerStatement.setBinaryStream(6, null);
+                customerStatement.setBinaryStream(5, null);
 
-            String insertRegistry = "INSERT INTO CUSTOMER_REGISTRATION(REGISTRATION_DATE, ID_CUSTOMER) VALUES(?,?)";
+            String insertRegistry = "INSERT INTO CUSTOMER_REGISTRATION(ID_CUSTOMER, PLAN, REGISTRATION_DATE, REGISTRATION_LIMIT, COST) VALUES(?,?,?,?,?)";
             registryStatement = getConnection().prepareStatement(insertRegistry);
 
-            registryStatement.setString(1, registry.getRegistrationDate());
-            registryStatement.setString(2, registry.getCustomer().getId());
+            registryStatement.setString(1, registry.getCustomer().getId());
+            registryStatement.setString(2, registry.getPlan());
+            registryStatement.setString(3, registry.getRegistrationDate());
+            registryStatement.setString(4, registry.getRegistrationLimit());
+            registryStatement.setDouble(5, registry.getCost());
 
             int customerRegistryAffected = customerStatement.executeUpdate();
             int registryRowAffected = registryStatement.executeUpdate();
@@ -125,4 +129,5 @@ public class CustomerDaoImp implements CustomerDao {
     private void setCustomerView(CustomerForm customerView) {
         CustomerView = customerView;
     }
+
 }

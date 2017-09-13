@@ -5,18 +5,11 @@ package com.aztsoft.gym.domain;
  */
 public class CustomerRegistration {
 
-    private String registrationDate;
     private Customer customer;
+    private String plan;
+    private String registrationDate;
     private String registrationLimit;
     private double cost;
-
-    public String getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(String registrationDate) {
-        this.registrationDate = registrationDate;
-    }
 
     public Customer getCustomer() {
         return customer;
@@ -24,6 +17,22 @@ public class CustomerRegistration {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public String getPlan() {
+        return plan;
+    }
+
+    public void setPlan(String plan) {
+        this.plan = plan;
+    }
+
+    public String getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(String registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
     public String getRegistrationLimit() {
@@ -41,5 +50,5 @@ public class CustomerRegistration {
     public void setCost(double cost) {
         this.cost = cost;
     }
-    
+
 }

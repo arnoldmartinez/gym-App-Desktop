@@ -17,7 +17,6 @@ public class Customer {
     private String name;
     private int age;
     private String address;
-    private String plan;
     private FileInputStream photo;
 
     public Customer() {
@@ -71,14 +70,6 @@ public class Customer {
      */
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getPlan() {
-        return plan;
-    }
-
-    public void setPlan(String plan) {
-        this.plan = plan;
     }
 
     public FileInputStream getPhoto() {

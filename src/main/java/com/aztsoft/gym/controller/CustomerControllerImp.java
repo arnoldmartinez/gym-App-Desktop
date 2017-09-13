@@ -11,8 +11,11 @@ import com.aztsoft.gym.service.CustomerService;
 import com.aztsoft.gym.service.CustomerServiceImp;
 import com.aztsoft.gym.view.CustomerForm;
 import com.toedter.calendar.JDateChooser;
+import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
+import java.text.StringCharacterIterator;
+import java.util.Date;
 
 /**
  *
@@ -44,12 +47,16 @@ public class CustomerControllerImp implements CustomerController {
 
         CustomerRegistration aRegistry = new CustomerRegistration();
         aRegistry.setCustomer(getDataClient());
+        aRegistry.setPlan((String) customerView.cmbPlan.getSelectedItem());
         aRegistry.setRegistrationDate(customerView.lblDate.getText());
+        aRegistry.setRegistrationLimit(getFormatDate(customerView.jdcLimitDate));
 
         if(customerView.cmbPlan.getSelectedIndex() > VISIT)
             aRegistry.setRegistrationLimit(getFormatDate(customerView.jdcLimitDate));
-        
-        aRegistry.setCost(new Double(customerView.txtCost.getText()));
+
+        if(StringUtils.isNotBlank(customerView.txtCost.getText()))
+            aRegistry.setCost(new Double(customerView.txtCost.getText()));
+
         return aRegistry;
     }
 
@@ -59,7 +66,6 @@ public class CustomerControllerImp implements CustomerController {
         aClient.setName(customerView.txtName.getText());
         aClient.setAge(getAgeClient());
         aClient.setAddress(customerView.txaAddress.getText());
-        aClient.setPlan((String) customerView.cmbPlan.getSelectedItem());
         aClient.setPhoto(customerView.imageBlob);
 
         return aClient;

@@ -25,8 +25,8 @@ public class CustomerServiceImp implements  CustomerService{
     @Override
     public void postCustomer(CustomerRegistration registry) {
         if(StringUtils.isBlank(registry.getCustomer().getName()) 
-                || StringUtils.isBlank(registry.getCustomer().getPlan())
-                || registry.getCost() < 0) {
+                || StringUtils.isBlank(registry.getPlan())
+                || registry.getCost() <= 0) {
             getCustomerView().showMessage("NO SE HAN LLENADO CAMPOS OBLIGATORIOS", "ERROR DE VALIDACION", JOptionPane.ERROR_MESSAGE);
             getCustomerView().showFieldRequiredName();
             return;

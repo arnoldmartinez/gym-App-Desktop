@@ -34,8 +34,6 @@ public class CustomerForm extends javax.swing.JFrame {
      */
     public CustomerForm() {
         customerController = new CustomerControllerImp(this);
-        hideFieldRequiredName();
-        disableLimitDateComponent();
     }
 
     /**
@@ -47,15 +45,6 @@ public class CustomerForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlDataClient = new javax.swing.JPanel();
-        lblname = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
-        lblAge = new javax.swing.JLabel();
-        txtAge = new javax.swing.JTextField();
-        lblAddress = new javax.swing.JLabel();
-        srcAddress = new javax.swing.JScrollPane();
-        txaAddress = new javax.swing.JTextArea();
-        lblnameRequired = new javax.swing.JLabel();
         pnlPhoto = new javax.swing.JPanel();
         lblPhoto = new javax.swing.JLabel();
         pnlContractDetail = new javax.swing.JPanel();
@@ -65,13 +54,23 @@ public class CustomerForm extends javax.swing.JFrame {
         lblLimitDate = new javax.swing.JLabel();
         txtCost = new javax.swing.JTextField();
         lblCost = new javax.swing.JLabel();
+        lblCostRequired = new javax.swing.JLabel();
         pnlCommand = new javax.swing.JPanel();
         btnPostClient = new javax.swing.JButton();
-        pnlHeader = new javax.swing.JPanel();
         pnlTittle = new javax.swing.JPanel();
         lblTittle = new javax.swing.JLabel();
         lblRegistrationDate = new javax.swing.JLabel();
         lblDate = new javax.swing.JLabel();
+        pnlDataClient = new javax.swing.JPanel();
+        lblname = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        lblAge = new javax.swing.JLabel();
+        txtAge = new javax.swing.JTextField();
+        lblAddress = new javax.swing.JLabel();
+        srcAddress = new javax.swing.JScrollPane();
+        txaAddress = new javax.swing.JTextArea();
+        lblnameRequired = new javax.swing.JLabel();
+        lblnameRequired2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -83,79 +82,6 @@ public class CustomerForm extends javax.swing.JFrame {
             public void windowLostFocus(java.awt.event.WindowEvent evt) {
             }
         });
-
-        pnlDataClient.setBackground(new java.awt.Color(153, 153, 153));
-
-        lblname.setText("Nombre: ");
-
-        txtName.setName(""); // NOI18N
-        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNameKeyTyped(evt);
-            }
-        });
-
-        lblAge.setText("Edad:");
-
-        txtAge.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtAgeKeyTyped(evt);
-            }
-        });
-
-        lblAddress.setText("Dirección:");
-
-        txaAddress.setColumns(20);
-        txaAddress.setRows(5);
-        txaAddress.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txaAddressKeyTyped(evt);
-            }
-        });
-        srcAddress.setViewportView(txaAddress);
-
-        lblnameRequired.setForeground(new java.awt.Color(255, 0, 0));
-        lblnameRequired.setText("*");
-
-        javax.swing.GroupLayout pnlDataClientLayout = new javax.swing.GroupLayout(pnlDataClient);
-        pnlDataClient.setLayout(pnlDataClientLayout);
-        pnlDataClientLayout.setHorizontalGroup(
-            pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDataClientLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblname)
-                    .addComponent(lblAge)
-                    .addComponent(lblAddress))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtName)
-                    .addComponent(srcAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblnameRequired, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlDataClientLayout.setVerticalGroup(
-            pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDataClientLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblname)
-                    .addComponent(lblnameRequired))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAge)
-                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDataClientLayout.createSequentialGroup()
-                        .addComponent(lblAddress)
-                        .addGap(0, 41, Short.MAX_VALUE))
-                    .addComponent(srcAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
-        );
 
         lblPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userIcon.png"))); // NOI18N
         lblPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -207,6 +133,9 @@ public class CustomerForm extends javax.swing.JFrame {
 
         lblCost.setText("Costo:");
 
+        lblCostRequired.setForeground(new java.awt.Color(255, 0, 0));
+        lblCostRequired.setText("*");
+
         javax.swing.GroupLayout pnlContractDetailLayout = new javax.swing.GroupLayout(pnlContractDetail);
         pnlContractDetail.setLayout(pnlContractDetailLayout);
         pnlContractDetailLayout.setHorizontalGroup(
@@ -214,33 +143,36 @@ public class CustomerForm extends javax.swing.JFrame {
             .addGroup(pnlContractDetailLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTypeRenter))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTypeRenter)
+                    .addComponent(cmbPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jdcLimitDate, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLimitDate))
-                .addGap(44, 44, 44)
+                .addGap(18, 18, 18)
                 .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCost)
-                    .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41))
+                    .addGroup(pnlContractDetailLayout.createSequentialGroup()
+                        .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCostRequired, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblCost))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlContractDetailLayout.setVerticalGroup(
             pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContractDetailLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTypeRenter)
+                    .addComponent(lblLimitDate)
+                    .addComponent(lblCost))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jdcLimitDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlContractDetailLayout.createSequentialGroup()
-                        .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTypeRenter)
-                            .addComponent(lblLimitDate)
-                            .addComponent(lblCost))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbPlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCost, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCostRequired))
+                    .addComponent(cmbPlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -269,8 +201,6 @@ public class CustomerForm extends javax.swing.JFrame {
                 .addComponent(btnPostClient, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        pnlHeader.setBackground(new java.awt.Color(0, 51, 102));
 
         pnlTittle.setBackground(new java.awt.Color(0, 51, 102));
 
@@ -303,7 +233,7 @@ public class CustomerForm extends javax.swing.JFrame {
         pnlTittleLayout.setVerticalGroup(
             pnlTittleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTittleLayout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTittle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlTittleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,20 +241,85 @@ public class CustomerForm extends javax.swing.JFrame {
                     .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
-        pnlHeader.setLayout(pnlHeaderLayout);
-        pnlHeaderLayout.setHorizontalGroup(
-            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHeaderLayout.createSequentialGroup()
+        pnlDataClient.setBackground(new java.awt.Color(153, 153, 153));
+
+        lblname.setText("Nombre: ");
+
+        txtName.setName(""); // NOI18N
+        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNameKeyTyped(evt);
+            }
+        });
+
+        lblAge.setText("Edad:");
+
+        txtAge.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAgeKeyTyped(evt);
+            }
+        });
+
+        lblAddress.setText("Dirección:");
+
+        txaAddress.setColumns(20);
+        txaAddress.setRows(5);
+        txaAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txaAddressKeyTyped(evt);
+            }
+        });
+        srcAddress.setViewportView(txaAddress);
+
+        lblnameRequired.setForeground(new java.awt.Color(255, 0, 0));
+        lblnameRequired.setText("*");
+
+        lblnameRequired2.setForeground(new java.awt.Color(255, 0, 0));
+        lblnameRequired2.setText(" ");
+
+        javax.swing.GroupLayout pnlDataClientLayout = new javax.swing.GroupLayout(pnlDataClient);
+        pnlDataClient.setLayout(pnlDataClientLayout);
+        pnlDataClientLayout.setHorizontalGroup(
+            pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDataClientLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlTittle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblname)
+                    .addComponent(lblAge)
+                    .addComponent(lblAddress))
+                .addGap(18, 18, 18)
+                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(srcAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlDataClientLayout.createSequentialGroup()
+                        .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblnameRequired2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblnameRequired, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
-        pnlHeaderLayout.setVerticalGroup(
-            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHeaderLayout.createSequentialGroup()
+        pnlDataClientLayout.setVerticalGroup(
+            pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDataClientLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlTittle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblname)
+                    .addComponent(lblnameRequired))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAge)
+                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblnameRequired2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDataClientLayout.createSequentialGroup()
+                        .addComponent(lblAddress)
+                        .addGap(0, 41, Short.MAX_VALUE))
+                    .addComponent(srcAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -334,10 +329,10 @@ public class CustomerForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlCommand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlTittle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(pnlCommand, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pnlContractDetail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(pnlPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -350,12 +345,12 @@ public class CustomerForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlTittle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlDataClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnlPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlDataClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlContractDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlCommand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -498,6 +493,7 @@ public class CustomerForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblAge;
     private javax.swing.JLabel lblCost;
+    private javax.swing.JLabel lblCostRequired;
     public javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblLimitDate;
     private javax.swing.JLabel lblPhoto;
@@ -506,10 +502,10 @@ public class CustomerForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblTypeRenter;
     private javax.swing.JLabel lblname;
     private javax.swing.JLabel lblnameRequired;
+    private javax.swing.JLabel lblnameRequired2;
     private javax.swing.JPanel pnlCommand;
     private javax.swing.JPanel pnlContractDetail;
     private javax.swing.JPanel pnlDataClient;
-    private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlPhoto;
     private javax.swing.JPanel pnlTittle;
     private javax.swing.JScrollPane srcAddress;
@@ -522,6 +518,9 @@ public class CustomerForm extends javax.swing.JFrame {
     public void startView() {
         initComponents();
         loadItemPlan();
+        txtCost.setText("0.0");
+        hideFieldRequiredName();
+        disableLimitDateComponent();
     }
 
     private void loadItemPlan() {
@@ -538,6 +537,7 @@ public class CustomerForm extends javax.swing.JFrame {
         txtAge.setText("");
         txaAddress.setText("");
         cmbPlan.getItemAt(0);
+        txtCost.setText("0.0");
     }
 
     public void showMessage(String aMessage, String tittle, int typeMessage) {
@@ -546,10 +546,12 @@ public class CustomerForm extends javax.swing.JFrame {
 
     public void showFieldRequiredName(){
         lblnameRequired.setVisible(true);
+        lblCostRequired.setVisible(true);
     }
     
     public void hideFieldRequiredName(){
         lblnameRequired.setVisible(false);
+        lblCostRequired.setVisible(false);
     }
 
     private void disableLimitDateComponent() {

@@ -169,9 +169,8 @@ public class CustomerForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jdcLimitDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblCostRequired))
+                    .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCostRequired)
                     .addComponent(cmbPlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -206,7 +205,7 @@ public class CustomerForm extends javax.swing.JFrame {
 
         lblTittle.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
         lblTittle.setForeground(new java.awt.Color(204, 204, 204));
-        lblTittle.setText("REGISTRO DE CILENTE");
+        lblTittle.setText("REGISTRO DE CLIENTE");
 
         lblRegistrationDate.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
         lblRegistrationDate.setForeground(new java.awt.Color(204, 204, 204));
@@ -226,16 +225,16 @@ public class CustomerForm extends javax.swing.JFrame {
                 .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(pnlTittleLayout.createSequentialGroup()
-                .addGap(137, 137, 137)
+                .addGap(150, 150, 150)
                 .addComponent(lblTittle)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlTittleLayout.setVerticalGroup(
             pnlTittleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTittleLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(lblTittle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlTittleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblRegistrationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -366,7 +365,7 @@ public class CustomerForm extends javax.swing.JFrame {
 
     private void txtAgeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAgeKeyTyped
         char alphabeticTyped = evt.getKeyChar();
-        if (Character.isAlphabetic(alphabeticTyped)) {
+        if (!Character.isDigit(alphabeticTyped)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -374,8 +373,7 @@ public class CustomerForm extends javax.swing.JFrame {
 
     private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
         char keyType = evt.getKeyChar();
-        if (Character.isDigit(keyType)) {
-            getToolkit().beep();
+        if (!Character.isLetter(keyType) && !Character.isSpace(keyType)) {
             evt.consume();
         }
         if (Character.isLowerCase(keyType)) {

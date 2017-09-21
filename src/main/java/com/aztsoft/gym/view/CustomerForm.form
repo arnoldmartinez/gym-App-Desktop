@@ -158,10 +158,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jdcLimitDate" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtCost" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCostRequired" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="txtCost" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCostRequired" min="-2" max="-2" attributes="0"/>
                       <Component id="cmbPlan" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -281,7 +279,7 @@
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
                   <Component id="lblTittle" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -290,9 +288,9 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="lblTittle" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lblTittle" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblRegistrationDate" alignment="0" min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="lblDate" min="-2" pref="18" max="-2" attributes="0"/>
@@ -310,7 +308,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="REGISTRO DE CILENTE"/>
+            <Property name="text" type="java.lang.String" value="REGISTRO DE CLIENTE"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblRegistrationDate">

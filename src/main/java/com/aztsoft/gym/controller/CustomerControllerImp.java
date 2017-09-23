@@ -14,8 +14,6 @@ import com.toedter.calendar.JDateChooser;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
-import java.text.StringCharacterIterator;
-import java.util.Date;
 
 /**
  *

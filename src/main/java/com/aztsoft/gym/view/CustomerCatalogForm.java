@@ -12,15 +12,15 @@ import com.aztsoft.gym.controller.CustomerControllerImp;
  *
  * @author windows
  */
-public class CustomerCatalogForm extends javax.swing.JFrame {
+public class CustomerCatalogForm extends javax.swing.JFrame implements ViewForm {
 
-    private CustomerController customerController;
+    private final CustomerController customerController;
     
     /**
      * Creates new form CustomerCatalogForm
      */
     public CustomerCatalogForm() {
-        initComponents();
+        customerController = new CustomerControllerImp(this);
     }
 
     /**
@@ -98,19 +98,13 @@ public class CustomerCatalogForm extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerCatalogForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerCatalogForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerCatalogForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CustomerCatalogForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new CustomerCatalogForm().setVisible(true);
             }
@@ -121,4 +115,9 @@ public class CustomerCatalogForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane scpCustomerCatalog;
     private javax.swing.JTable tblCustomerCatalog;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void startView() {
+        initComponents();
+    }
 }

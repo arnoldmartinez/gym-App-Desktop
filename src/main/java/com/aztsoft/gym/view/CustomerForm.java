@@ -24,7 +24,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author windows
  */
-public class CustomerForm extends javax.swing.JFrame {
+public class CustomerForm extends javax.swing.JFrame implements ViewForm {
 
     private final CustomerController customerController;
     public FileInputStream imageBlob = null;
@@ -513,13 +513,7 @@ public class CustomerForm extends javax.swing.JFrame {
     public javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 
-    public void startView() {
-        initComponents();
-        loadItemPlan();
-        txtCost.setText("0.0");
-        hideFieldRequiredName();
-        disableLimitDateComponent();
-    }
+    
 
     private void loadItemPlan() {
         cmbPlan.addItem("VISITA");
@@ -555,4 +549,14 @@ public class CustomerForm extends javax.swing.JFrame {
     private void disableLimitDateComponent() {
         jdcLimitDate.setDate(new Date());
     }
+
+    @Override
+    public void startView() {
+        initComponents();
+        loadItemPlan();
+        txtCost.setText("0.0");
+        hideFieldRequiredName();
+        disableLimitDateComponent();
+    }
+
 }

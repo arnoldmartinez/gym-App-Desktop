@@ -16,6 +16,7 @@ import com.toedter.calendar.JDateChooser;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  *
@@ -84,6 +85,12 @@ public class CustomerControllerImp implements CustomerController {
     private String getFormatDate(JDateChooser dateChooser){
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         return dateChooser == null ? null : format.format(dateChooser.getDate());
+    }
+
+    @Override
+    public List<CustomerRegistration> getAllCustomerRecords() {
+        CustomerService customerService = new CustomerServiceImp(customerForm);
+        return customerService.getAllCustomerRecords();
     }
 
 }

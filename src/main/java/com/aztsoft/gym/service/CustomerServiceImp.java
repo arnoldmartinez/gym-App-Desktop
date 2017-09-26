@@ -1,10 +1,12 @@
 package com.aztsoft.gym.service;
 
+import com.aztsoft.gym.domain.Customer;
 import com.aztsoft.gym.domain.CustomerRegistration;
 import com.aztsoft.gym.persistence.connection.ConnectionMySQL;
 import com.aztsoft.gym.persistence.dao.CustomerDao;
 import com.aztsoft.gym.persistence.dao.CustomerDaoImp;
 import com.aztsoft.gym.view.CustomerForm;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
@@ -21,7 +23,7 @@ public class CustomerServiceImp implements  CustomerService{
         setCustomerView(customerView);
         customerDao = new CustomerDaoImp(new ConnectionMySQL(), customerView);
     }
-
+    
     @Override
     public void postCustomer(CustomerRegistration registry) {
         if(StringUtils.isBlank(registry.getCustomer().getName()) 
@@ -35,6 +37,11 @@ public class CustomerServiceImp implements  CustomerService{
         getCustomerView().hideFieldRequiredName();
     }
 
+    @Override
+    public List<CustomerRegistration> getAllCustomerRecords() {
+        return customerDao.getAllCustomerRecords();
+    }
+    
     private CustomerForm getCustomerView() {
         return customerView;
     }
@@ -42,4 +49,5 @@ public class CustomerServiceImp implements  CustomerService{
     private void setCustomerView(CustomerForm customerView) {
         this.customerView = customerView;
     }
+    
 }

@@ -5,6 +5,7 @@
  */
 package com.aztsoft.gym.persistence.dao;
 
+import com.aztsoft.gym.domain.Customer;
 import com.aztsoft.gym.persistence.connection.ConnectionJDBC;
 import com.aztsoft.gym.domain.CustomerRegistration;
 import com.aztsoft.gym.view.CustomerForm;
@@ -13,7 +14,10 @@ import javax.swing.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -126,6 +130,35 @@ public class CustomerDaoImp implements CustomerDao {
 
     private void setCustomerView(CustomerForm customerView) {
         CustomerView = customerView;
+    }
+
+    @Override
+    public List<CustomerRegistration> getAllCustomerRecords() {
+        PreparedStatement customerStatement = null;
+        List<CustomerRegistration> registry = new ArrayList<CustomerRegistration>();
+        try {
+            getConnection().setAutoCommit(false);
+            String selectCustomer = "select c.NAME, c.AGE, c.ADDRESS, cr.PLAN, cr.REGISTRATION_DATE, cr.REGISTRATION_LIMIT \n" +
+                    "from customer c, customer_registration cr\n" +
+                    "where c.ID = cr.ID_CUSTOMER\n" +
+                    "order by cr.REGISTRATION_DATE desc;";
+            customerStatement = getConnection().prepareStatement(selectCustomer);
+            ResultSet result = customerStatement.executeQuery();
+            while(result.next()){
+                CustomerRegistration customerRegistration = new CustomerRegistration();
+                Customer customer = new Customer();
+                customerRegistration.setCustomer(customer);
+                customerRegistration.getCustomer().setName(result.getString("NAME"));
+                customerRegistration.getCustomer().setAge(result.getInt("AGE"));
+                customerRegistration.setPlan(result.getString("PLAN"));
+                customerRegistration.setRegistrationDate(result.getString("REGISTRATION_DATE"));
+                customerRegistration.setRegistrationLimit(result.getString("REGISTRATION_LIMIT"));
+                registry.add(customerRegistration);
+            }
+            return registry;
+        } catch (SQLException e) {
+            return null;
+        }
     }
 
 }

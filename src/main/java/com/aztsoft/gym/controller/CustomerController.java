@@ -5,6 +5,11 @@
  */
 package com.aztsoft.gym.controller;
 
+import com.aztsoft.gym.domain.Customer;
+import com.aztsoft.gym.domain.CustomerRegistration;
+
+import java.util.List;
+
 /**
  *
  * @author windows
@@ -12,4 +17,6 @@ package com.aztsoft.gym.controller;
 public interface CustomerController {
     
     void postCustomer();
+    
+    List<CustomerRegistration> getAllCustomerRecords();
 }

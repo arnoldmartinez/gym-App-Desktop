@@ -5,12 +5,17 @@
  */
 package com.aztsoft.gym.persistence.dao;
 
+import com.aztsoft.gym.domain.Customer;
 import com.aztsoft.gym.domain.CustomerRegistration;
+import java.util.List;
 
 /**
  *
  * @author windows
  */
 public interface CustomerDao {
+    
     void postCustomer(CustomerRegistration registry);
+    
+    List<CustomerRegistration> getAllCustomerRecords();
 }

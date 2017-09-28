@@ -150,6 +150,7 @@ public class CustomerDaoImp implements CustomerDao {
                 customerRegistration.setCustomer(customer);
                 customerRegistration.getCustomer().setName(result.getString("NAME"));
                 customerRegistration.getCustomer().setAge(result.getInt("AGE"));
+                customerRegistration.getCustomer().setAddress(result.getString("ADDRESS"));
                 customerRegistration.setPlan(result.getString("PLAN"));
                 customerRegistration.setRegistrationDate(result.getString("REGISTRATION_DATE"));
                 customerRegistration.setRegistrationLimit(result.getString("REGISTRATION_LIMIT"));

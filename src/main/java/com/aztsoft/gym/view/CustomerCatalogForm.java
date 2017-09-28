@@ -7,6 +7,9 @@ package com.aztsoft.gym.view;
 
 import com.aztsoft.gym.controller.CustomerController;
 import com.aztsoft.gym.controller.CustomerControllerImp;
+import com.aztsoft.gym.domain.CustomerRegistration;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -88,7 +91,11 @@ public class CustomerCatalogForm extends javax.swing.JFrame implements ViewForm 
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        customerController.getAllCustomerRecords();
+        
+        CustomerTableModel customerModel = new CustomerTableModel();
+        customerModel.addRecordAll(customerController.getAllCustomerRecords());
+        
+        tblCustomerCatalog.setModel(customerModel);
     }//GEN-LAST:event_formWindowOpened
 
     /**

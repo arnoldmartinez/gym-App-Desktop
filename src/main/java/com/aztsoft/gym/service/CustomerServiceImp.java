@@ -1,8 +1,6 @@
 package com.aztsoft.gym.service;
 
-import com.aztsoft.gym.domain.Customer;
 import com.aztsoft.gym.domain.CustomerRegistration;
-import com.aztsoft.gym.persistence.connection.ConnectionMySQL;
 import com.aztsoft.gym.persistence.dao.CustomerDao;
 import com.aztsoft.gym.persistence.dao.CustomerDaoImp;
 import com.aztsoft.gym.view.CustomerForm;
@@ -16,12 +14,12 @@ import javax.swing.*;
  */
 public class CustomerServiceImp implements  CustomerService{
 
-    private final CustomerDao customerDao;
+    private CustomerDao customerDao;
     private CustomerForm customerView;
 
     public CustomerServiceImp(CustomerForm customerView) {
         setCustomerView(customerView);
-        customerDao = new CustomerDaoImp(new ConnectionMySQL(), customerView);
+        customerDao = new CustomerDaoImp();
     }
     
     @Override
@@ -34,6 +32,9 @@ public class CustomerServiceImp implements  CustomerService{
             return;
         }
         customerDao.postCustomer(registry);
+        getCustomerView().showMessage("CLIENTE AGREGADO CON EXITO!", "EXITOSAMENTE!", JOptionPane.PLAIN_MESSAGE);
+        getCustomerView().hideFieldRequiredName();
+        getCustomerView().cleanFields();
         getCustomerView().hideFieldRequiredName();
     }
 

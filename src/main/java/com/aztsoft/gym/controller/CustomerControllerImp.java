@@ -34,10 +34,8 @@ public class CustomerControllerImp implements CustomerController {
     }
 
     private void setView(ViewForm view){
-        
         if(view instanceof CustomerForm) this.customerForm = (CustomerForm) view;
         if(view instanceof CustomerCatalogForm) this.customerCatalogForm = (CustomerCatalogForm) view;
-        
     }
 
      private void startView(ViewForm view) {

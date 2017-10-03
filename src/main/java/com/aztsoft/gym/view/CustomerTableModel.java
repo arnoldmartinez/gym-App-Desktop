@@ -23,7 +23,16 @@ public class CustomerTableModel extends DefaultTableModel {
     private static final String REGISTRATION_DATE_COLUMN = "FECHA DE REGISTRO";
     private static final String REGISTRATION_LIMIT_COLUMN = "FECHA LIMITE";
 
-    private Object[] rowsTable = new Object[6];
+    private final static int TOTAL_COLUMNS = 6;
+
+    private final static int NAME_ROW = 0;
+    private final static int AGE_ROW = 1;
+    private final static int ADDRESS_ROW = 2;
+    private final static int PLAN_ROW = 3;
+    private final static int REGISTRATION_DATE_ROW = 4;
+    private final static int REGISTRATION_LIMIT_ROW = 5;
+
+    private final Object[] rowsTable = new Object[TOTAL_COLUMNS];
 
     public CustomerTableModel() {
 
@@ -40,12 +49,12 @@ public class CustomerTableModel extends DefaultTableModel {
 
         for(CustomerRegistration aRecord : records){
 
-            rowsTable[0] = aRecord.getCustomer().getName();
-            rowsTable[1] = aRecord.getCustomer().getAge();
-            rowsTable[2] = aRecord.getCustomer().getAddress();
-            rowsTable[3] = aRecord.getPlan();
-            rowsTable[4] = aRecord.getRegistrationDate();
-            rowsTable[5] = aRecord.getRegistrationLimit();
+            rowsTable[NAME_ROW] = aRecord.getCustomer().getName();
+            rowsTable[AGE_ROW] = aRecord.getCustomer().getAge();
+            rowsTable[ADDRESS_ROW] = aRecord.getCustomer().getAddress();
+            rowsTable[PLAN_ROW] = aRecord.getPlan();
+            rowsTable[REGISTRATION_DATE_ROW] = aRecord.getRegistrationDate();
+            rowsTable[REGISTRATION_LIMIT_ROW] = aRecord.getRegistrationLimit();
 
             addRow(rowsTable);
         }

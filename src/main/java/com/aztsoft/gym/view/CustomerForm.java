@@ -24,7 +24,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author windows
  */
-public class CustomerForm extends javax.swing.JFrame {
+public class CustomerForm extends javax.swing.JFrame implements ViewForm {
 
     private final CustomerController customerController;
     public FileInputStream imageBlob = null;
@@ -464,20 +464,13 @@ public class CustomerForm extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CustomerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new CustomerForm().setVisible(true);
             }
@@ -513,13 +506,7 @@ public class CustomerForm extends javax.swing.JFrame {
     public javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 
-    public void startView() {
-        initComponents();
-        loadItemPlan();
-        txtCost.setText("0.0");
-        hideFieldRequiredName();
-        disableLimitDateComponent();
-    }
+    
 
     private void loadItemPlan() {
         cmbPlan.addItem("VISITA");
@@ -555,4 +542,14 @@ public class CustomerForm extends javax.swing.JFrame {
     private void disableLimitDateComponent() {
         jdcLimitDate.setDate(new Date());
     }
+
+    @Override
+    public void startView() {
+        initComponents();
+        loadItemPlan();
+        txtCost.setText("0.0");
+        hideFieldRequiredName();
+        disableLimitDateComponent();
+    }
+
 }

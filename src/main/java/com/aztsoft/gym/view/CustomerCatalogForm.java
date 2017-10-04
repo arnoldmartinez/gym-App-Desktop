@@ -7,20 +7,23 @@ package com.aztsoft.gym.view;
 
 import com.aztsoft.gym.controller.CustomerController;
 import com.aztsoft.gym.controller.CustomerControllerImp;
+import com.aztsoft.gym.domain.CustomerRegistration;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author windows
  */
-public class CustomerCatalogForm extends javax.swing.JFrame {
+public class CustomerCatalogForm extends javax.swing.JFrame implements ViewForm {
 
-    private CustomerController customerController;
+    private final CustomerController customerController;
     
     /**
      * Creates new form CustomerCatalogForm
      */
     public CustomerCatalogForm() {
-        initComponents();
+        customerController = new CustomerControllerImp(this);
     }
 
     /**
@@ -36,6 +39,11 @@ public class CustomerCatalogForm extends javax.swing.JFrame {
         tblCustomerCatalog = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         tblCustomerCatalog.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -82,6 +90,14 @@ public class CustomerCatalogForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+        CustomerTableModel customerModel = new CustomerTableModel();
+        customerModel.addRecordAll(customerController.getAllCustomerRecords());
+        
+        tblCustomerCatalog.setModel(customerModel);
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -98,19 +114,13 @@ public class CustomerCatalogForm extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerCatalogForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerCatalogForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerCatalogForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CustomerCatalogForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new CustomerCatalogForm().setVisible(true);
             }
@@ -121,4 +131,9 @@ public class CustomerCatalogForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane scpCustomerCatalog;
     private javax.swing.JTable tblCustomerCatalog;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void startView() {
+        initComponents();
+    }
 }

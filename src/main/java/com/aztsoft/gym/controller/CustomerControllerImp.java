@@ -22,7 +22,6 @@ import java.util.List;
  * @author arnold9108@gmail.com 11/09/2017
  */
 public class CustomerControllerImp implements CustomerController {
-
     private static final int VISIT = 0;
     private CustomerForm customerForm;
 
@@ -37,7 +36,7 @@ public class CustomerControllerImp implements CustomerController {
         }
     }
 
-     private void startView(ViewForm view) {
+    private void startView(ViewForm view) {
         view.startView();
     }
     
@@ -49,31 +48,25 @@ public class CustomerControllerImp implements CustomerController {
 
     private CustomerRegistration getDataRegistry() {
         CustomerRegistration aRegistry = new CustomerRegistration();
-
         aRegistry.setCustomer(getDataClient());
         aRegistry.setPlan((String) customerForm.cmbPlan.getSelectedItem());
         aRegistry.setRegistrationDate(customerForm.lblDate.getText());
         aRegistry.setRegistrationLimit(getFormatDate(customerForm.jdcLimitDate));
-
         if(customerForm.cmbPlan.getSelectedIndex() > VISIT) {
             aRegistry.setRegistrationLimit(getFormatDate(customerForm.jdcLimitDate));
         }
-
         if(StringUtils.isNotBlank(customerForm.txtCost.getText())) {
             aRegistry.setCost(new Double(customerForm.txtCost.getText()));
         }
-
         return aRegistry;
     }
 
     private Customer getDataClient() {
-
         Customer aClient = new Customer();
         aClient.setName(customerForm.txtName.getText());
         aClient.setAge(getAgeClient());
         aClient.setAddress(customerForm.txaAddress.getText());
         aClient.setPhoto(customerForm.imageBlob);
-
         return aClient;
     }
 

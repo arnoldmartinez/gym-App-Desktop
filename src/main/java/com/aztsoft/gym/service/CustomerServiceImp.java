@@ -15,17 +15,16 @@ import javax.swing.*;
  * Created by arnold9108@gmail.com
  */
 public class CustomerServiceImp implements CustomerService{
-
-    private CustomerDao customerDao = new CustomerDaoImp();
+    private final CustomerDao customerDao;
     private CustomerForm customerForm;
 
     public CustomerServiceImp() {
-
+        customerDao = new CustomerDaoImp();
     }
 
     public CustomerServiceImp(ViewForm customerView) {
         setView(customerView);
-
+        customerDao = new CustomerDaoImp();
     }
 
     private void setView(ViewForm view){
@@ -44,8 +43,7 @@ public class CustomerServiceImp implements CustomerService{
             return;
         }
         customerDao.postCustomer(registry);
-        customerForm.showMessage("CLIENTE AGREGADO CON EXITO!", "EXITOSAMENTE!", JOptionPane.PLAIN_MESSAGE);
-        customerForm.hideFieldRequiredName();
+        customerForm.showMessage("EL CLIENTE SE HA AGREGADO CON EXITO!", "CLIENTE AÑADIDO", JOptionPane.PLAIN_MESSAGE);
         customerForm.cleanFields();
         customerForm.hideFieldRequiredName();
     }

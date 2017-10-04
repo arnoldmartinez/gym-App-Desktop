@@ -25,15 +25,13 @@ public class CustomerTransaction {
             "from customer c, customer_registration cr\n" +
             "where c.ID = cr.ID_CUSTOMER\n" +
             "order by cr.REGISTRATION_DATE desc;";
-
     private static final int ROW_AFFECTED = 1;
-
-    private Connection connection;
+    private final Connection connection;
     private PreparedStatement customerStatement;
-    private  PreparedStatement registryStatement;
+    private PreparedStatement registryStatement;
 
     public CustomerTransaction(ConnectionJDBC connectionJDBC) {
-        setConnection(connectionJDBC.getConnection());
+        this.connection = connectionJDBC.getConnection();
     }
 
     public void insertCustomer(CustomerRegistration registry) throws TransactionException {
@@ -42,41 +40,35 @@ public class CustomerTransaction {
         } catch (SQLException | IOException exception) {
             throw new TransactionException(exception.getMessage(), exception.getCause());
         } finally {
-            closeIntancesTransaction();
+            closeInstancesTransaction();
         }
     }
 
     private void tryInsertCustomerDateBase(CustomerRegistration registry) throws SQLException, IOException {
-        getConnection().setAutoCommit(false);
-
-        setCustomerStatement(getConnection().prepareStatement(INSERT_CUSTOMER_QUERY));
-        getCustomerStatement().setString(CustomerTableDB.ID_CUSTOMER_FIELD, registry.getCustomer().getId());
-        getCustomerStatement().setString(CustomerTableDB.NAME_FIELD, registry.getCustomer().getName());
-        getCustomerStatement().setInt(CustomerTableDB.AGE_FIELD, registry.getCustomer().getAge());
-        getCustomerStatement().setString(CustomerTableDB.ADDRESS_FIELD, registry.getCustomer().getAddress());
-
+        connection.setAutoCommit(false);
+        customerStatement = connection.prepareStatement(INSERT_CUSTOMER_QUERY);
+        customerStatement.setString(CustomerTableDB.ID_CUSTOMER_FIELD, registry.getCustomer().getId());
+        customerStatement.setString(CustomerTableDB.NAME_FIELD, registry.getCustomer().getName());
+        customerStatement.setInt(CustomerTableDB.AGE_FIELD, registry.getCustomer().getAge());
+        customerStatement.setString(CustomerTableDB.ADDRESS_FIELD, registry.getCustomer().getAddress());
         if (registry.getCustomer().getPhoto() != null)
-            getCustomerStatement().setBinaryStream(CustomerTableDB.PHOTO_FIELD, registry.getCustomer().getPhoto(), registry.getCustomer().getPhoto().available());
+            customerStatement.setBinaryStream(CustomerTableDB.PHOTO_FIELD, registry.getCustomer().getPhoto(), registry.getCustomer().getPhoto().available());
         else
-            getCustomerStatement().setBinaryStream(CustomerTableDB.PHOTO_FIELD, null);
-
-        setRegistryStatement(getConnection().prepareStatement(INSERT_CUSTOMER_REGISTRATION_QUERY));
-
-        getRegistryStatement().setString(CustomerTableDB.ID_CUSTOMER_FIELD, registry.getCustomer().getId());
-        getRegistryStatement().setString(CustomerRegistrationTableDB.PLAN_FIELD, registry.getPlan());
-        getRegistryStatement().setString(CustomerRegistrationTableDB.REGISTRATION_DATE_FIELD, registry.getRegistrationDate());
-        getRegistryStatement().setString(CustomerRegistrationTableDB.REGISTRATION_LIMIT_FIELD, registry.getRegistrationLimit());
-        getRegistryStatement().setDouble(CustomerRegistrationTableDB.COST_FIELD, registry.getCost());
-
+            customerStatement.setBinaryStream(CustomerTableDB.PHOTO_FIELD, null);
+        setRegistryStatement(connection.prepareStatement(INSERT_CUSTOMER_REGISTRATION_QUERY));
+        registryStatement.setString(CustomerTableDB.ID_CUSTOMER_FIELD, registry.getCustomer().getId());
+        registryStatement.setString(CustomerRegistrationTableDB.PLAN_FIELD, registry.getPlan());
+        registryStatement.setString(CustomerRegistrationTableDB.REGISTRATION_DATE_FIELD, registry.getRegistrationDate());
+        registryStatement.setString(CustomerRegistrationTableDB.REGISTRATION_LIMIT_FIELD, registry.getRegistrationLimit());
+        registryStatement.setDouble(CustomerRegistrationTableDB.COST_FIELD, registry.getCost());
         int customerRegistryAffected = customerStatement.executeUpdate();
         int registryRowAffected = registryStatement.executeUpdate();
-
         if(customerRegistryAffected == ROW_AFFECTED & registryRowAffected  == ROW_AFFECTED) {
-            getConnection().commit();
+            connection.commit();
         }
     }
 
-    private void closeIntancesTransaction() throws TransactionException {
+    private void closeInstancesTransaction() throws TransactionException {
         try {
             closeStatementsSQL();
         } catch (SQLException sqlException) {
@@ -85,7 +77,7 @@ public class CustomerTransaction {
     }
 
     private void closeStatementsSQL() throws SQLException {
-        getCustomerStatement().close();
+        customerStatement.close();
         getRegistryStatement().close();
     }
 
@@ -99,9 +91,8 @@ public class CustomerTransaction {
     }
 
     private List<CustomerRegistration> tryGetAllCustomerRecords(List<CustomerRegistration> registry) throws SQLException {
-        PreparedStatement customerStatement;
-        getConnection().setAutoCommit(false);
-        customerStatement = getConnection().prepareStatement(GET_ALL_CUSTOMER_RECORDS_QUERY);
+        connection.setAutoCommit(false);
+        PreparedStatement customerStatement = connection.prepareStatement(GET_ALL_CUSTOMER_RECORDS_QUERY);
         ResultSet result = customerStatement.executeQuery();
         while(result.next()){
             CustomerRegistration customerRegistration = new CustomerRegistration();
@@ -117,24 +108,6 @@ public class CustomerTransaction {
         }
         return registry;
     }
-
-    private Connection getConnection() {
-        return connection;
-    }
-
-    private void setConnection(Connection connection) {
-        this.connection = connection;
-    }
-
-
-    private PreparedStatement getCustomerStatement() {
-        return customerStatement;
-    }
-
-    private void setCustomerStatement(PreparedStatement customerStatement) {
-        this.customerStatement = customerStatement;
-    }
-
 
     private void setRegistryStatement(PreparedStatement registryStatement) {
         this.registryStatement = registryStatement;

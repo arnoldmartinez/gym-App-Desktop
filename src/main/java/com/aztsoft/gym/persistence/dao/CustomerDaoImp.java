@@ -17,9 +17,15 @@ import java.util.List;
  */
 public class CustomerDaoImp implements CustomerDao {
 
+    private final ConnectionMySQL connectionMySQL;
+
+    public CustomerDaoImp() {
+        connectionMySQL = new ConnectionMySQL();
+    }
+
     @Override
     public void postCustomer(CustomerRegistration registry) {
-        CustomerTransaction customerTransaction = new CustomerTransaction(new ConnectionMySQL());
+        CustomerTransaction customerTransaction = new CustomerTransaction(connectionMySQL);
         try {
             customerTransaction.insertCustomer(registry);
         } catch (TransactionException transactionException) {
@@ -29,7 +35,7 @@ public class CustomerDaoImp implements CustomerDao {
 
     @Override
     public List<CustomerRegistration> getAllCustomerRecords() {
-        CustomerTransaction customerTransaction = new CustomerTransaction(new ConnectionMySQL());
+        CustomerTransaction customerTransaction = new CustomerTransaction(connectionMySQL);
         try {
             return customerTransaction.getAllCustomerRecords();
         } catch (TransactionException transactionException) {

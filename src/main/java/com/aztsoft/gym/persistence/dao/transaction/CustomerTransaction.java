@@ -55,7 +55,7 @@ public class CustomerTransaction {
             customerStatement.setBinaryStream(CustomerTableDB.PHOTO_FIELD, registry.getCustomer().getPhoto(), registry.getCustomer().getPhoto().available());
         else
             customerStatement.setBinaryStream(CustomerTableDB.PHOTO_FIELD, null);
-        setRegistryStatement(connection.prepareStatement(INSERT_CUSTOMER_REGISTRATION_QUERY));
+        registryStatement = connection.prepareStatement(INSERT_CUSTOMER_REGISTRATION_QUERY);
         registryStatement.setString(CustomerTableDB.ID_CUSTOMER_FIELD, registry.getCustomer().getId());
         registryStatement.setString(CustomerRegistrationTableDB.PLAN_FIELD, registry.getPlan());
         registryStatement.setString(CustomerRegistrationTableDB.REGISTRATION_DATE_FIELD, registry.getRegistrationDate());
@@ -78,7 +78,7 @@ public class CustomerTransaction {
 
     private void closeStatementsSQL() throws SQLException {
         customerStatement.close();
-        getRegistryStatement().close();
+        registryStatement.close();
     }
 
     public List<CustomerRegistration> getAllCustomerRecords() throws TransactionException{
@@ -109,11 +109,4 @@ public class CustomerTransaction {
         return registry;
     }
 
-    private void setRegistryStatement(PreparedStatement registryStatement) {
-        this.registryStatement = registryStatement;
-    }
-
-    private PreparedStatement getRegistryStatement() {
-        return registryStatement;
-    }
 }

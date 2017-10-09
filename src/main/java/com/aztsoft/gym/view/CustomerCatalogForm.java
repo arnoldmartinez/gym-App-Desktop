@@ -7,23 +7,21 @@ package com.aztsoft.gym.view;
 
 import com.aztsoft.gym.controller.CustomerController;
 import com.aztsoft.gym.controller.CustomerControllerImp;
-import com.aztsoft.gym.domain.CustomerRegistration;
-import java.util.List;
-import javax.swing.table.DefaultTableModel;
+import com.aztsoft.gym.view.command.Command;
+import com.aztsoft.gym.view.command.GetAllCustomerRecordsCommand;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author windows
  */
-public class CustomerCatalogForm extends javax.swing.JFrame implements ViewForm {
-
-    private final CustomerController customerController;
+public final class CustomerCatalogForm extends javax.swing.JFrame implements ViewForm {
     
     /**
      * Creates new form CustomerCatalogForm
      */
     public CustomerCatalogForm() {
-        customerController = new CustomerControllerImp(this);
+        runView();
     }
 
     /**
@@ -91,13 +89,16 @@ public class CustomerCatalogForm extends javax.swing.JFrame implements ViewForm 
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
-        CustomerTableModel customerModel = new CustomerTableModel();
-        customerModel.addRecordAll(customerController.getAllCustomerRecords());
-        
-        tblCustomerCatalog.setModel(customerModel);
+        CustomerController customerController;
+        customerController = new CustomerControllerImp(this);
+        Command getAllCustomerRecordsCommand = new GetAllCustomerRecordsCommand(customerController);
+        getAllCustomerRecordsCommand.execute();
     }//GEN-LAST:event_formWindowOpened
 
+    public void setModel(TableModel model){
+        tblCustomerCatalog.setModel(model);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -133,7 +134,7 @@ public class CustomerCatalogForm extends javax.swing.JFrame implements ViewForm 
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void startView() {
+    public void runView() {
         initComponents();
     }
 }

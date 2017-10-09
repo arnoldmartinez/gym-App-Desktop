@@ -7,6 +7,11 @@ package com.aztsoft.gym.view;
 
 import com.aztsoft.gym.controller.CustomerController;
 import com.aztsoft.gym.controller.CustomerControllerImp;
+import com.aztsoft.gym.domain.Customer;
+import com.aztsoft.gym.domain.CustomerRegistration;
+import com.aztsoft.gym.view.command.AddCustomerCommand;
+import com.aztsoft.gym.view.command.Command;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,21 +24,21 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
  * @author windows
  */
-public class CustomerForm extends javax.swing.JFrame implements ViewForm {
-
-    private final CustomerController customerController;
+public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
+    private static final int VISIT = 0;
     public FileInputStream imageBlob = null;
 
     /**
      * Creates new form ClientForm
      */
     public CustomerForm() {
-        customerController = new CustomerControllerImp(this);
+        runView();
     }
 
     /**
@@ -360,9 +365,44 @@ public class CustomerForm extends javax.swing.JFrame implements ViewForm {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPostClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostClientActionPerformed
-        customerController.postCustomer();
+        CustomerController controller = new CustomerControllerImp(this);
+        Command addCustomer = new AddCustomerCommand(controller);
+        addCustomer.execute();
     }//GEN-LAST:event_btnPostClientActionPerformed
 
+    public CustomerRegistration getDataRegistry() {
+        CustomerRegistration aRegistry = new CustomerRegistration();
+        aRegistry.setCustomer(getDataClient());
+        aRegistry.setPlan((String) cmbPlan.getSelectedItem());
+        aRegistry.setRegistrationDate(lblDate.getText());
+        aRegistry.setRegistrationLimit(getFormatDate(jdcLimitDate));
+        if(cmbPlan.getSelectedIndex() > VISIT) {
+            aRegistry.setRegistrationLimit(getFormatDate(jdcLimitDate));
+        }
+        if(StringUtils.isNotBlank(txtCost.getText())) {
+            aRegistry.setCost(new Double(txtCost.getText()));
+        }
+        return aRegistry;
+    }
+    
+    private Customer getDataClient() {
+        Customer aClient = new Customer();
+        aClient.setName(txtName.getText());
+        aClient.setAge(getAgeClient());
+        aClient.setAddress(txaAddress.getText());
+        aClient.setPhoto(imageBlob);
+        return aClient;
+    }
+    
+    private int getAgeClient() {
+        return txtAge.getText().equals("") ? 0 : Integer.valueOf(txtAge.getText());
+    }
+
+    private String getFormatDate(JDateChooser dateChooser) {
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        return dateChooser == null ? null : format.format(dateChooser.getDate());
+    }
+    
     private void txtAgeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAgeKeyTyped
         char alphabeticTyped = evt.getKeyChar();
         if (!Character.isDigit(alphabeticTyped)) {
@@ -484,7 +524,7 @@ public class CustomerForm extends javax.swing.JFrame implements ViewForm {
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblAge;
     private javax.swing.JLabel lblCost;
-    private javax.swing.JLabel lblCostRequired;
+    public javax.swing.JLabel lblCostRequired;
     public javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblLimitDate;
     private javax.swing.JLabel lblPhoto;
@@ -492,7 +532,7 @@ public class CustomerForm extends javax.swing.JFrame implements ViewForm {
     private javax.swing.JLabel lblTittle;
     private javax.swing.JLabel lblTypeRenter;
     private javax.swing.JLabel lblname;
-    private javax.swing.JLabel lblnameRequired;
+    public javax.swing.JLabel lblnameRequired;
     private javax.swing.JLabel lblnameRequired2;
     private javax.swing.JPanel pnlCommand;
     private javax.swing.JPanel pnlContractDetail;
@@ -529,12 +569,12 @@ public class CustomerForm extends javax.swing.JFrame implements ViewForm {
         JOptionPane.showMessageDialog(this, aMessage, tittle, typeMessage);
     }
 
-    public void showFieldRequiredName(){
+    public void showFieldRequiredName() {
         lblnameRequired.setVisible(true);
         lblCostRequired.setVisible(true);
     }
     
-    public void hideFieldRequiredName(){
+    public void hideFieldRequiredName() {
         lblnameRequired.setVisible(false);
         lblCostRequired.setVisible(false);
     }
@@ -544,7 +584,7 @@ public class CustomerForm extends javax.swing.JFrame implements ViewForm {
     }
 
     @Override
-    public void startView() {
+    public void runView() {
         initComponents();
         loadItemPlan();
         txtCost.setText("0.0");

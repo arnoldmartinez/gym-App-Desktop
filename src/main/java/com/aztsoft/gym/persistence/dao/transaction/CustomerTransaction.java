@@ -22,7 +22,7 @@ public class CustomerTransaction {
     private static final String INSERT_CUSTOMER_QUERY = "INSERT INTO CUSTOMER(ID, NAME, AGE, ADDRESS, IMAGE) VALUES(?,?,?,?,?)";
     private static final String INSERT_CUSTOMER_REGISTRATION_QUERY = "INSERT INTO CUSTOMER_REGISTRATION(ID_CUSTOMER, PLAN, REGISTRATION_DATE, REGISTRATION_LIMIT, COST) VALUES(?,?,?,?,?)";
     private static final String GET_ALL_CUSTOMER_RECORDS_QUERY = "select c.NAME, c.AGE, c.ADDRESS, cr.PLAN, cr.REGISTRATION_DATE, cr.REGISTRATION_LIMIT \n" +
-            "from customer c, customer_registration cr\n" +
+            "from CUSTOMER c, CUSTOMER_REGISTRATION cr\n" +
             "where c.ID = cr.ID_CUSTOMER\n" +
             "order by cr.REGISTRATION_DATE desc;";
     private static final int ROW_AFFECTED = 1;

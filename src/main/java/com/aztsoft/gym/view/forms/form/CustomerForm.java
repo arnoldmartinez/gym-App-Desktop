@@ -8,6 +8,8 @@ import com.aztsoft.gym.view.command.concrete.AddCustomerCommand;
 import com.aztsoft.gym.view.command.abstractcommand.Command;
 import com.aztsoft.gym.view.forms.abstractview.ViewForm;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
@@ -118,6 +120,18 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
 
         lblLimitDate.setText("Fecha limite:");
 
+        txtCost.setForeground(new java.awt.Color(204, 204, 204));
+        txtCost.setText("0.0");
+        txtCost.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCostFocusLost(evt);
+            }
+        });
+        txtCost.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCostMouseClicked(evt);
+            }
+        });
         txtCost.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCostKeyTyped(evt);
@@ -162,8 +176,9 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jdcLimitDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCostRequired)
+                    .addGroup(pnlContractDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCostRequired))
                     .addComponent(cmbPlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -237,7 +252,19 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
 
         lblname.setText("Nombre: ");
 
+        txtName.setForeground(new java.awt.Color(204, 204, 204));
+        txtName.setText("INGRESA TU NOMBRE");
         txtName.setName(""); // NOI18N
+        txtName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNameFocusLost(evt);
+            }
+        });
+        txtName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNameMouseClicked(evt);
+            }
+        });
         txtName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNameKeyTyped(evt);
@@ -246,6 +273,18 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
 
         lblAge.setText("Edad:");
 
+        txtAge.setForeground(new java.awt.Color(204, 204, 204));
+        txtAge.setText("EDAD");
+        txtAge.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtAgeFocusLost(evt);
+            }
+        });
+        txtAge.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtAgeMouseClicked(evt);
+            }
+        });
         txtAge.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtAgeKeyTyped(evt);
@@ -255,7 +294,19 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
         lblAddress.setText("Dirección:");
 
         txaAddress.setColumns(20);
+        txaAddress.setForeground(new java.awt.Color(204, 204, 204));
         txaAddress.setRows(5);
+        txaAddress.setText("INGRESA TU DIRECCION");
+        txaAddress.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txaAddressFocusLost(evt);
+            }
+        });
+        txaAddress.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txaAddressMouseClicked(evt);
+            }
+        });
         txaAddress.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txaAddressKeyTyped(evt);
@@ -476,6 +527,54 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
         }
     }//GEN-LAST:event_txtCostKeyTyped
 
+    private void txtCostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCostMouseClicked
+        txtCost.setText("");
+        txtCost.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txtCostMouseClicked
+
+    private void txtCostFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCostFocusLost
+        if(StringUtils.isBlank(txtCost.getText())) {
+            txtCost.setForeground(new Color(204, 204, 204));
+            txtCost.setText("0.0");
+        }
+    }//GEN-LAST:event_txtCostFocusLost
+
+    private void txtNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNameMouseClicked
+        txtName.setText("");
+        txtName.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txtNameMouseClicked
+
+    private void txtAgeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAgeMouseClicked
+        txtAge.setText("");
+        txtAge.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txtAgeMouseClicked
+
+    private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
+        if(StringUtils.isBlank(txtName.getText())) {
+            txtName.setForeground(new Color(204, 204, 204));
+            txtName.setText("INGRESA TU NOMBRE");
+        }
+    }//GEN-LAST:event_txtNameFocusLost
+
+    private void txtAgeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAgeFocusLost
+        if(StringUtils.isBlank(txtAge.getText())) {
+            txtAge.setForeground(new Color(204, 204, 204));
+            txtAge.setText("EDAD");
+        }
+    }//GEN-LAST:event_txtAgeFocusLost
+
+    private void txaAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txaAddressFocusLost
+        if(StringUtils.isBlank(txaAddress.getText())) {
+            txaAddress.setForeground(new Color(204, 204, 204));
+            txaAddress.setText("INGRESA TU DIRECCION");
+        }
+    }//GEN-LAST:event_txaAddressFocusLost
+
+    private void txaAddressMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txaAddressMouseClicked
+        txaAddress.setText("");
+        txaAddress.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txaAddressMouseClicked
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -563,7 +662,6 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
     public void runView() {
         initComponents();
         loadItemPlan();
-        txtCost.setText("0.0");
         hideFieldRequiredName();
         disableLimitDateComponent();
     }

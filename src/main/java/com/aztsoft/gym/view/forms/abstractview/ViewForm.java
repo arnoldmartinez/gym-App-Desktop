@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.aztsoft.gym.view.command;
+package com.aztsoft.gym.view.forms.abstractview;
 
 /**
  *
- * @author vmuser
+ * @author windows
  */
-public interface Command {
-    
-    void execute();
+public interface ViewForm {
+    public void runView();
 }

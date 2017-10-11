@@ -9,8 +9,8 @@ import com.aztsoft.gym.view.command.abstractcommand.Command;
 import com.aztsoft.gym.view.forms.abstractview.ViewForm;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.commons.lang3.StringUtils;
 
@@ -273,18 +274,7 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
 
         lblAge.setText("Edad:");
 
-        txtAge.setForeground(new java.awt.Color(204, 204, 204));
-        txtAge.setText("EDAD");
-        txtAge.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtAgeFocusLost(evt);
-            }
-        });
-        txtAge.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtAgeMouseClicked(evt);
-            }
-        });
+        txtAge.setForeground(new java.awt.Color(0, 0, 0));
         txtAge.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtAgeKeyTyped(evt);
@@ -443,22 +433,17 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
     }
     
     private void txtAgeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAgeKeyTyped
-        char alphabeticTyped = evt.getKeyChar();
-        if (!Character.isDigit(alphabeticTyped)) {
+        if (!Character.isDigit(evt.getKeyChar())) {
             getToolkit().beep();
             evt.consume();
         }
     }//GEN-LAST:event_txtAgeKeyTyped
 
     private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
-        char keyType = evt.getKeyChar();
-        if (!Character.isLetter(keyType) && !Character.isSpace(keyType)) {
+        if (!Character.isLetter(evt.getKeyChar()) && !Character.isSpace(evt.getKeyChar())) {
             evt.consume();
         }
-        if (Character.isLowerCase(keyType)) {
-            evt.setKeyChar(Character.toUpperCase(keyType));
-        }
-
+        setUpperCase(evt);
     }//GEN-LAST:event_txtNameKeyTyped
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
@@ -468,35 +453,26 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void lblPhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPhotoMouseClicked
-
         JFileChooser imageChooser = new JFileChooser();
-
         FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Image", "jpg", "gif");
         imageChooser.setFileFilter(filter);
-
         int result = imageChooser.showOpenDialog(this);
         if (result == JFileChooser.CANCEL_OPTION) {
             return;
         }
-
         File imagePathFile = imageChooser.getSelectedFile();
         try {
             imageBlob = new FileInputStream(imagePathFile);
         } catch (IOException ex) {
             Logger.getLogger(CustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         ImageIcon imageIcon = new ImageIcon(imagePathFile.getPath());
         Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
         lblPhoto.setIcon(new ImageIcon(image));
-
     }//GEN-LAST:event_lblPhotoMouseClicked
 
     private void txaAddressKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaAddressKeyTyped
-        char keyType = evt.getKeyChar();
-        if (Character.isLowerCase(keyType)) {
-            evt.setKeyChar(Character.toUpperCase(keyType));
-        }
+        setUpperCase(evt);
     }//GEN-LAST:event_txaAddressKeyTyped
 
     private void cmbPlanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPlanItemStateChanged
@@ -520,16 +496,20 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
     }//GEN-LAST:event_cmbPlanItemStateChanged
 
     private void txtCostKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostKeyTyped
-        char alphabeticTyped = evt.getKeyChar();
-        if (Character.isAlphabetic(alphabeticTyped)) {
+        if (Character.isAlphabetic(evt.getKeyChar())) {
             getToolkit().beep();
             evt.consume();
         }
     }//GEN-LAST:event_txtCostKeyTyped
 
+    private void setUpperCase(KeyEvent evt) {
+        if(Character.isLowerCase(evt.getKeyChar())) {
+            evt.setKeyChar(Character.toUpperCase(evt.getKeyChar()));
+        }
+    }
+    
     private void txtCostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCostMouseClicked
-        txtCost.setText("");
-        txtCost.setForeground(Color.BLACK);
+        setForegroundDefault(txtCost, "0.0");
     }//GEN-LAST:event_txtCostMouseClicked
 
     private void txtCostFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCostFocusLost
@@ -540,14 +520,8 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
     }//GEN-LAST:event_txtCostFocusLost
 
     private void txtNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNameMouseClicked
-        txtName.setText("");
-        txtName.setForeground(Color.BLACK);
+        setForegroundDefault(txtName, "INGRESA TU NOMBRE");
     }//GEN-LAST:event_txtNameMouseClicked
-
-    private void txtAgeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAgeMouseClicked
-        txtAge.setText("");
-        txtAge.setForeground(Color.BLACK);
-    }//GEN-LAST:event_txtAgeMouseClicked
 
     private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
         if(StringUtils.isBlank(txtName.getText())) {
@@ -555,13 +529,6 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
             txtName.setText("INGRESA TU NOMBRE");
         }
     }//GEN-LAST:event_txtNameFocusLost
-
-    private void txtAgeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAgeFocusLost
-        if(StringUtils.isBlank(txtAge.getText())) {
-            txtAge.setForeground(new Color(204, 204, 204));
-            txtAge.setText("EDAD");
-        }
-    }//GEN-LAST:event_txtAgeFocusLost
 
     private void txaAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txaAddressFocusLost
         if(StringUtils.isBlank(txaAddress.getText())) {
@@ -571,10 +538,19 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
     }//GEN-LAST:event_txaAddressFocusLost
 
     private void txaAddressMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txaAddressMouseClicked
-        txaAddress.setText("");
-        txaAddress.setForeground(Color.BLACK);
+        if(txaAddress.getText().equals("INGRESA TU DIRECCION") || StringUtils.isBlank(txaAddress.getText())) {
+            txaAddress.setText("");
+            txaAddress.setForeground(Color.BLACK);
+        }
     }//GEN-LAST:event_txaAddressMouseClicked
 
+    private void setForegroundDefault(JTextField textField, String nameDefault) {
+        if(textField.getText().equals(nameDefault) || StringUtils.isBlank(textField.getText())) {
+            textField.setText("");
+            textField.setForeground(Color.BLACK);
+        }
+    }
+    
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

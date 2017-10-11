@@ -8,10 +8,10 @@ package com.aztsoft.gym.controller;
 import com.aztsoft.gym.domain.CustomerRegistration;
 import com.aztsoft.gym.service.CustomerService;
 import com.aztsoft.gym.service.CustomerServiceImp;
-import com.aztsoft.gym.view.CustomerCatalogForm;
-import com.aztsoft.gym.view.CustomerForm;
-import com.aztsoft.gym.view.CustomerTableModel;
-import com.aztsoft.gym.view.ViewForm;
+import com.aztsoft.gym.view.forms.form.CustomerCatalogForm;
+import com.aztsoft.gym.view.forms.form.CustomerForm;
+import com.aztsoft.gym.view.forms.model.CustomerTableModel;
+import com.aztsoft.gym.view.forms.abstractview.ViewForm;
 
 import java.util.List;
 

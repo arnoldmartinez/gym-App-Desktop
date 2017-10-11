@@ -3,7 +3,7 @@ package com.aztsoft.gym.service;
 import com.aztsoft.gym.domain.CustomerRegistration;
 import com.aztsoft.gym.persistence.dao.CustomerDao;
 import com.aztsoft.gym.persistence.dao.CustomerDaoImp;
-import com.aztsoft.gym.view.CustomerForm;
+import com.aztsoft.gym.view.forms.form.CustomerForm;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;

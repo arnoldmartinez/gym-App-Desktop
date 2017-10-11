@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.aztsoft.gym.view.command;
+package com.aztsoft.gym.view.command.concrete;
 
 import com.aztsoft.gym.controller.CustomerController;
+import com.aztsoft.gym.view.command.abstractcommand.Command;
 
 /**
  *

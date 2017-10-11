@@ -32,9 +32,64 @@ import org.apache.commons.lang3.StringUtils;
 public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
     private static final int VISIT = 0;
     public FileInputStream imageBlob = null;
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPostClient;
+    public javax.swing.JComboBox<String> cmbPlan;
+    public com.toedter.calendar.JDateChooser jdcLimitDate;
+    private javax.swing.JLabel lblAddress;
+    private javax.swing.JLabel lblAge;
+    private javax.swing.JLabel lblCost;
+    public javax.swing.JLabel lblCostRequired;
+    public javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblLimitDate;
+    private javax.swing.JLabel lblPhoto;
+    private javax.swing.JLabel lblRegistrationDate;
+    private javax.swing.JLabel lblTittle;
+    private javax.swing.JLabel lblTypeRenter;
+    private javax.swing.JLabel lblname;
+    public javax.swing.JLabel lblnameRequired;
+    private javax.swing.JLabel lblnameRequired2;
+    private javax.swing.JPanel pnlCommand;
+    private javax.swing.JPanel pnlContractDetail;
+    private javax.swing.JPanel pnlDataClient;
+    private javax.swing.JPanel pnlPhoto;
+    private javax.swing.JPanel pnlTittle;
+    private javax.swing.JScrollPane srcAddress;
+    public javax.swing.JTextArea txaAddress;
+    public javax.swing.JTextField txtAge;
+    public javax.swing.JTextField txtCost;
+    public javax.swing.JTextField txtName;
+    // End of variables declaration//GEN-END:variables
 
     public CustomerForm() {
         runView();
+    }
+
+    public static void main(String args[]) {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CustomerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new CustomerForm().setVisible(true);
+            }
+        });
+    }
+
+    @Override
+    public void runView() {
+        initComponents();
+        loadItemPlan();
+        hideFieldRequiredName();
+        disableLimitDateComponent();
     }
 
     @SuppressWarnings("unchecked")
@@ -108,19 +163,14 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
         );
 
         pnlContractDetail.setBackground(new java.awt.Color(153, 153, 153));
-
         lblTypeRenter.setText("Tipo de renta:");
-
         cmbPlan.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbPlanItemStateChanged(evt);
             }
         });
-
         jdcLimitDate.setEnabled(false);
-
         lblLimitDate.setText("Fecha limite:");
-
         txtCost.setForeground(new java.awt.Color(204, 204, 204));
         txtCost.setText("0.0");
         txtCost.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -138,9 +188,7 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
                 txtCostKeyTyped(evt);
             }
         });
-
         lblCost.setText("Costo:");
-
         lblCostRequired.setForeground(new java.awt.Color(255, 0, 0));
         lblCostRequired.setText("*");
 
@@ -185,7 +233,6 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
         );
 
         pnlCommand.setBackground(new java.awt.Color(153, 153, 153));
-
         btnPostClient.setText("Agregar");
         btnPostClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,15 +258,12 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
         );
 
         pnlTittle.setBackground(new java.awt.Color(0, 51, 102));
-
         lblTittle.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
         lblTittle.setForeground(new java.awt.Color(204, 204, 204));
         lblTittle.setText("REGISTRO DE CLIENTE");
-
         lblRegistrationDate.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
         lblRegistrationDate.setForeground(new java.awt.Color(204, 204, 204));
         lblRegistrationDate.setText("Fecha de registro:");
-
         lblDate.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
         lblDate.setForeground(new java.awt.Color(204, 204, 204));
 
@@ -250,9 +294,7 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
         );
 
         pnlDataClient.setBackground(new java.awt.Color(153, 153, 153));
-
         lblname.setText("Nombre: ");
-
         txtName.setForeground(new java.awt.Color(204, 204, 204));
         txtName.setText("INGRESA TU NOMBRE");
         txtName.setName(""); // NOI18N
@@ -271,18 +313,14 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
                 txtNameKeyTyped(evt);
             }
         });
-
         lblAge.setText("Edad:");
-
         txtAge.setForeground(new java.awt.Color(0, 0, 0));
         txtAge.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtAgeKeyTyped(evt);
             }
         });
-
         lblAddress.setText("Dirección:");
-
         txaAddress.setColumns(20);
         txaAddress.setForeground(new java.awt.Color(204, 204, 204));
         txaAddress.setRows(5);
@@ -303,10 +341,8 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
             }
         });
         srcAddress.setViewportView(txaAddress);
-
         lblnameRequired.setForeground(new java.awt.Color(255, 0, 0));
         lblnameRequired.setText("*");
-
         lblnameRequired2.setForeground(new java.awt.Color(255, 0, 0));
         lblnameRequired2.setText(" ");
 
@@ -389,15 +425,133 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
                 .addComponent(pnlCommand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
+        lblDate.setText(format.format(date));
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void lblPhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPhotoMouseClicked
+        JFileChooser imageChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Image", "jpg", "gif");
+        imageChooser.setFileFilter(filter);
+        int result = imageChooser.showOpenDialog(this);
+        if (result == JFileChooser.CANCEL_OPTION) {
+            return;
+        }
+        File imagePathFile = imageChooser.getSelectedFile();
+        try {
+            imageBlob = new FileInputStream(imagePathFile);
+        } catch (IOException ex) {
+            Logger.getLogger(CustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ImageIcon imageIcon = new ImageIcon(imagePathFile.getPath());
+        Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+        lblPhoto.setIcon(new ImageIcon(image));
+    }//GEN-LAST:event_lblPhotoMouseClicked
+
+    private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
+        if(StringUtils.isBlank(txtName.getText())) {
+            txtName.setForeground(new Color(204, 204, 204));
+            txtName.setText("INGRESA TU NOMBRE");
+        }
+    }//GEN-LAST:event_txtNameFocusLost
+
+    private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
+        if (!Character.isLetter(evt.getKeyChar()) && !Character.isSpace(evt.getKeyChar())) {
+            evt.consume();
+        }
+        setUpperCase(evt);
+    }//GEN-LAST:event_txtNameKeyTyped
+
+    private void txtNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNameMouseClicked
+        setForegroundDefault(txtName, "INGRESA TU NOMBRE");
+    }//GEN-LAST:event_txtNameMouseClicked
+
+    private void txtAgeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAgeKeyTyped
+        if (!Character.isDigit(evt.getKeyChar())) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAgeKeyTyped
+
+    private void txaAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txaAddressFocusLost
+        if(StringUtils.isBlank(txaAddress.getText())) {
+            txaAddress.setForeground(new Color(204, 204, 204));
+            txaAddress.setText("INGRESA TU DIRECCION");
+        }
+    }//GEN-LAST:event_txaAddressFocusLost
+
+    private void txaAddressKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaAddressKeyTyped
+        setUpperCase(evt);
+    }//GEN-LAST:event_txaAddressKeyTyped
+
+    private void txaAddressMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txaAddressMouseClicked
+        if(txaAddress.getText().equals("INGRESA TU DIRECCION") || StringUtils.isBlank(txaAddress.getText())) {
+            txaAddress.setText("");
+            txaAddress.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txaAddressMouseClicked
+
+    private void txtCostFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCostFocusLost
+        if(StringUtils.isBlank(txtCost.getText())) {
+            txtCost.setForeground(new Color(204, 204, 204));
+            txtCost.setText("0.0");
+        }
+    }//GEN-LAST:event_txtCostFocusLost
+
+    private void txtCostKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostKeyTyped
+        if (Character.isAlphabetic(evt.getKeyChar())) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCostKeyTyped
+
+    private void txtCostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCostMouseClicked
+        setForegroundDefault(txtCost, "0.0");
+    }//GEN-LAST:event_txtCostMouseClicked
+
+    private void cmbPlanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPlanItemStateChanged
+        switch((String) cmbPlan.getSelectedItem()){
+            case "VISITA":
+                jdcLimitDate.setEnabled(false);
+                break;
+            case "SEMANA":
+                jdcLimitDate.setEnabled(true);
+                break;
+            case "QUINCENA":
+                jdcLimitDate.setEnabled(true);
+                break;
+            case "MES":
+                jdcLimitDate.setEnabled(true);
+                break;
+            case "AÑO":
+                jdcLimitDate.setEnabled(true);
+                break;
+        }
+    }//GEN-LAST:event_cmbPlanItemStateChanged
 
     private void btnPostClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostClientActionPerformed
         CustomerController controller = new CustomerControllerImp(this);
         Command addCustomer = new AddCustomerCommand(controller);
         addCustomer.execute();
     }//GEN-LAST:event_btnPostClientActionPerformed
+
+    private void setUpperCase(KeyEvent evt) {
+        if(Character.isLowerCase(evt.getKeyChar())) {
+            evt.setKeyChar(Character.toUpperCase(evt.getKeyChar()));
+        }
+    }
+
+    private void setForegroundDefault(JTextField textField, String nameDefault) {
+        if(textField.getText().equals(nameDefault) || StringUtils.isBlank(textField.getText())) {
+            textField.setText("");
+            textField.setForeground(Color.BLACK);
+        }
+    }
 
     public CustomerRegistration getDataRegistry() {
         CustomerRegistration aRegistry = new CustomerRegistration();
@@ -431,173 +585,6 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         return dateChooser == null ? null : format.format(dateChooser.getDate());
     }
-    
-    private void txtAgeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAgeKeyTyped
-        if (!Character.isDigit(evt.getKeyChar())) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtAgeKeyTyped
-
-    private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
-        if (!Character.isLetter(evt.getKeyChar()) && !Character.isSpace(evt.getKeyChar())) {
-            evt.consume();
-        }
-        setUpperCase(evt);
-    }//GEN-LAST:event_txtNameKeyTyped
-
-    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        Date date = new Date();
-        lblDate.setText(format.format(date));
-    }//GEN-LAST:event_formWindowGainedFocus
-
-    private void lblPhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPhotoMouseClicked
-        JFileChooser imageChooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Image", "jpg", "gif");
-        imageChooser.setFileFilter(filter);
-        int result = imageChooser.showOpenDialog(this);
-        if (result == JFileChooser.CANCEL_OPTION) {
-            return;
-        }
-        File imagePathFile = imageChooser.getSelectedFile();
-        try {
-            imageBlob = new FileInputStream(imagePathFile);
-        } catch (IOException ex) {
-            Logger.getLogger(CustomerForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ImageIcon imageIcon = new ImageIcon(imagePathFile.getPath());
-        Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-        lblPhoto.setIcon(new ImageIcon(image));
-    }//GEN-LAST:event_lblPhotoMouseClicked
-
-    private void txaAddressKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaAddressKeyTyped
-        setUpperCase(evt);
-    }//GEN-LAST:event_txaAddressKeyTyped
-
-    private void cmbPlanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPlanItemStateChanged
-        switch((String) cmbPlan.getSelectedItem()){
-            case "VISITA":
-                jdcLimitDate.setEnabled(false);
-                break;
-            case "SEMANA":
-                jdcLimitDate.setEnabled(true);
-              break;
-            case "QUINCENA":
-                jdcLimitDate.setEnabled(true);
-                break;
-            case "MES":
-                jdcLimitDate.setEnabled(true);
-                break;
-            case "AÑO":
-                jdcLimitDate.setEnabled(true);
-                break;
-        }
-    }//GEN-LAST:event_cmbPlanItemStateChanged
-
-    private void txtCostKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostKeyTyped
-        if (Character.isAlphabetic(evt.getKeyChar())) {
-            getToolkit().beep();
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtCostKeyTyped
-
-    private void setUpperCase(KeyEvent evt) {
-        if(Character.isLowerCase(evt.getKeyChar())) {
-            evt.setKeyChar(Character.toUpperCase(evt.getKeyChar()));
-        }
-    }
-    
-    private void txtCostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCostMouseClicked
-        setForegroundDefault(txtCost, "0.0");
-    }//GEN-LAST:event_txtCostMouseClicked
-
-    private void txtCostFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCostFocusLost
-        if(StringUtils.isBlank(txtCost.getText())) {
-            txtCost.setForeground(new Color(204, 204, 204));
-            txtCost.setText("0.0");
-        }
-    }//GEN-LAST:event_txtCostFocusLost
-
-    private void txtNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNameMouseClicked
-        setForegroundDefault(txtName, "INGRESA TU NOMBRE");
-    }//GEN-LAST:event_txtNameMouseClicked
-
-    private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
-        if(StringUtils.isBlank(txtName.getText())) {
-            txtName.setForeground(new Color(204, 204, 204));
-            txtName.setText("INGRESA TU NOMBRE");
-        }
-    }//GEN-LAST:event_txtNameFocusLost
-
-    private void txaAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txaAddressFocusLost
-        if(StringUtils.isBlank(txaAddress.getText())) {
-            txaAddress.setForeground(new Color(204, 204, 204));
-            txaAddress.setText("INGRESA TU DIRECCION");
-        }
-    }//GEN-LAST:event_txaAddressFocusLost
-
-    private void txaAddressMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txaAddressMouseClicked
-        if(txaAddress.getText().equals("INGRESA TU DIRECCION") || StringUtils.isBlank(txaAddress.getText())) {
-            txaAddress.setText("");
-            txaAddress.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_txaAddressMouseClicked
-
-    private void setForegroundDefault(JTextField textField, String nameDefault) {
-        if(textField.getText().equals(nameDefault) || StringUtils.isBlank(textField.getText())) {
-            textField.setText("");
-            textField.setForeground(Color.BLACK);
-        }
-    }
-    
-    public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new CustomerForm().setVisible(true);
-            }
-        });
-    }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPostClient;
-    public javax.swing.JComboBox<String> cmbPlan;
-    public com.toedter.calendar.JDateChooser jdcLimitDate;
-    private javax.swing.JLabel lblAddress;
-    private javax.swing.JLabel lblAge;
-    private javax.swing.JLabel lblCost;
-    public javax.swing.JLabel lblCostRequired;
-    public javax.swing.JLabel lblDate;
-    private javax.swing.JLabel lblLimitDate;
-    private javax.swing.JLabel lblPhoto;
-    private javax.swing.JLabel lblRegistrationDate;
-    private javax.swing.JLabel lblTittle;
-    private javax.swing.JLabel lblTypeRenter;
-    private javax.swing.JLabel lblname;
-    public javax.swing.JLabel lblnameRequired;
-    private javax.swing.JLabel lblnameRequired2;
-    private javax.swing.JPanel pnlCommand;
-    private javax.swing.JPanel pnlContractDetail;
-    private javax.swing.JPanel pnlDataClient;
-    private javax.swing.JPanel pnlPhoto;
-    private javax.swing.JPanel pnlTittle;
-    private javax.swing.JScrollPane srcAddress;
-    public javax.swing.JTextArea txaAddress;
-    public javax.swing.JTextField txtAge;
-    public javax.swing.JTextField txtCost;
-    public javax.swing.JTextField txtName;
-    // End of variables declaration//GEN-END:variables
 
     private void loadItemPlan() {
         cmbPlan.addItem("VISITA");
@@ -632,14 +619,6 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
 
     private void disableLimitDateComponent() {
         jdcLimitDate.setDate(new Date());
-    }
-
-    @Override
-    public void runView() {
-        initComponents();
-        loadItemPlan();
-        hideFieldRequiredName();
-        disableLimitDateComponent();
     }
 
 }

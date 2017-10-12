@@ -163,14 +163,24 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
         );
 
         pnlContractDetail.setBackground(new java.awt.Color(153, 153, 153));
+
         lblTypeRenter.setText("Tipo de renta:");
+
         cmbPlan.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbPlanItemStateChanged(evt);
             }
         });
+        cmbPlan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cmbPlanKeyPressed(evt);
+            }
+        });
+
         jdcLimitDate.setEnabled(false);
+
         lblLimitDate.setText("Fecha limite:");
+
         txtCost.setForeground(new java.awt.Color(204, 204, 204));
         txtCost.setText("0.0");
         txtCost.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -187,8 +197,13 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCostKeyTyped(evt);
             }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCostKeyPressed(evt);
+            }
         });
+
         lblCost.setText("Costo:");
+
         lblCostRequired.setForeground(new java.awt.Color(255, 0, 0));
         lblCostRequired.setText("*");
 
@@ -233,6 +248,7 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
         );
 
         pnlCommand.setBackground(new java.awt.Color(153, 153, 153));
+
         btnPostClient.setText("Agregar");
         btnPostClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,12 +274,15 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
         );
 
         pnlTittle.setBackground(new java.awt.Color(0, 51, 102));
+
         lblTittle.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
         lblTittle.setForeground(new java.awt.Color(204, 204, 204));
         lblTittle.setText("REGISTRO DE CLIENTE");
+
         lblRegistrationDate.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
         lblRegistrationDate.setForeground(new java.awt.Color(204, 204, 204));
         lblRegistrationDate.setText("Fecha de registro:");
+
         lblDate.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
         lblDate.setForeground(new java.awt.Color(204, 204, 204));
 
@@ -294,11 +313,16 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
         );
 
         pnlDataClient.setBackground(new java.awt.Color(153, 153, 153));
+
         lblname.setText("Nombre: ");
+
         txtName.setForeground(new java.awt.Color(204, 204, 204));
         txtName.setText("INGRESA TU NOMBRE");
         txtName.setName(""); // NOI18N
         txtName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNameFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNameFocusLost(evt);
             }
@@ -312,20 +336,33 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNameKeyTyped(evt);
             }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNameKeyPressed(evt);
+            }
         });
+
         lblAge.setText("Edad:");
+
         txtAge.setForeground(new java.awt.Color(0, 0, 0));
         txtAge.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtAgeKeyTyped(evt);
             }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAgeKeyPressed(evt);
+            }
         });
+
         lblAddress.setText("Dirección:");
+
         txaAddress.setColumns(20);
         txaAddress.setForeground(new java.awt.Color(204, 204, 204));
         txaAddress.setRows(5);
         txaAddress.setText("INGRESA TU DIRECCION");
         txaAddress.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txaAddressFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txaAddressFocusLost(evt);
             }
@@ -339,10 +376,15 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txaAddressKeyTyped(evt);
             }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txaAddressKeyPressed(evt);
+            }
         });
         srcAddress.setViewportView(txaAddress);
+
         lblnameRequired.setForeground(new java.awt.Color(255, 0, 0));
         lblnameRequired.setText("*");
+
         lblnameRequired2.setForeground(new java.awt.Color(255, 0, 0));
         lblnameRequired2.setText(" ");
 
@@ -425,6 +467,7 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
                 .addComponent(pnlCommand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -453,12 +496,22 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
         lblPhoto.setIcon(new ImageIcon(image));
     }//GEN-LAST:event_lblPhotoMouseClicked
 
+    private void txtNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusGained
+        setForegroundDefault(txtName, "INGRESA TU NOMBRE");
+    }//GEN-LAST:event_txtNameFocusGained
+
     private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
         if(StringUtils.isBlank(txtName.getText())) {
             txtName.setForeground(new Color(204, 204, 204));
             txtName.setText("INGRESA TU NOMBRE");
         }
     }//GEN-LAST:event_txtNameFocusLost
+
+    private void txtNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtAge.requestFocus();
+        }
+    }//GEN-LAST:event_txtNameKeyPressed
 
     private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
         if (!Character.isLetter(evt.getKeyChar()) && !Character.isSpace(evt.getKeyChar())) {
@@ -471,6 +524,12 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
         setForegroundDefault(txtName, "INGRESA TU NOMBRE");
     }//GEN-LAST:event_txtNameMouseClicked
 
+    private void txtAgeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAgeKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txaAddress.requestFocus();
+        }
+    }//GEN-LAST:event_txtAgeKeyPressed
+
     private void txtAgeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAgeKeyTyped
         if (!Character.isDigit(evt.getKeyChar())) {
             getToolkit().beep();
@@ -478,12 +537,25 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
         }
     }//GEN-LAST:event_txtAgeKeyTyped
 
+    private void txaAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txaAddressFocusGained
+        if(txaAddress.getText().equals("INGRESA TU DIRECCION") || StringUtils.isBlank(txaAddress.getText())) {
+            txaAddress.setText("");
+            txaAddress.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txaAddressFocusGained
+
     private void txaAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txaAddressFocusLost
         if(StringUtils.isBlank(txaAddress.getText())) {
             txaAddress.setForeground(new Color(204, 204, 204));
             txaAddress.setText("INGRESA TU DIRECCION");
         }
     }//GEN-LAST:event_txaAddressFocusLost
+
+    private void txaAddressKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaAddressKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            cmbPlan.requestFocus();
+        }
+    }//GEN-LAST:event_txaAddressKeyPressed
 
     private void txaAddressKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaAddressKeyTyped
         setUpperCase(evt);
@@ -502,6 +574,12 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
             txtCost.setText("0.0");
         }
     }//GEN-LAST:event_txtCostFocusLost
+
+    private void txtCostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnPostClient.requestFocus();
+        }
+    }//GEN-LAST:event_txtCostKeyPressed
 
     private void txtCostKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostKeyTyped
         if (Character.isAlphabetic(evt.getKeyChar())) {
@@ -533,6 +611,12 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
                 break;
         }
     }//GEN-LAST:event_cmbPlanItemStateChanged
+
+    private void cmbPlanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbPlanKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtCost.requestFocus();
+        }
+    }//GEN-LAST:event_cmbPlanKeyPressed
 
     private void btnPostClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostClientActionPerformed
         CustomerController controller = new CustomerControllerImp(this);

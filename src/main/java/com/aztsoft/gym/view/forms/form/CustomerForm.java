@@ -181,6 +181,7 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
 
         lblLimitDate.setText("Fecha limite:");
 
+        txtCost.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         txtCost.setForeground(new java.awt.Color(204, 204, 204));
         txtCost.setText("0.0");
         txtCost.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -472,7 +473,7 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         lblDate.setText(format.format(date));
     }//GEN-LAST:event_formWindowGainedFocus
@@ -666,7 +667,7 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
     }
 
     private String getFormatDate(JDateChooser dateChooser) {
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return dateChooser == null ? null : format.format(dateChooser.getDate());
     }
 

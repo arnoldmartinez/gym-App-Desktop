@@ -7,9 +7,6 @@ package com.aztsoft.gym.view;
 
 import com.aztsoft.gym.controller.CustomerController;
 import com.aztsoft.gym.controller.CustomerControllerImp;
-import com.aztsoft.gym.domain.CustomerRegistration;
-import java.util.List;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *

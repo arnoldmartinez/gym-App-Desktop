@@ -28,19 +28,17 @@ public class CustomerTransaction {
     private static final int ROW_AFFECTED = 1;
     private final Connection connection;
     private PreparedStatement customerStatement;
-    private PreparedStatement registryStatement;
+    private ResultSet resultCustomer;
 
     public CustomerTransaction(ConnectionJDBC connectionJDBC) {
         this.connection = connectionJDBC.getConnection();
     }
 
-    public void insertCustomer(CustomerRegistration registry) throws TransactionException {
+    public final void insertCustomer(CustomerRegistration registry) throws TransactionException {
         try {
             tryInsertCustomerDateBase(registry);
         } catch (SQLException | IOException exception) {
-            throw new TransactionException(exception.getMessage(), exception.getCause());
-        } finally {
-            closeInstancesTransaction();
+            throwCustomerTransactionException(exception.getMessage(), exception.getCause());
         }
     }
 
@@ -51,11 +49,12 @@ public class CustomerTransaction {
         customerStatement.setString(CustomerTableDB.NAME_FIELD, registry.getCustomer().getName());
         customerStatement.setInt(CustomerTableDB.AGE_FIELD, registry.getCustomer().getAge());
         customerStatement.setString(CustomerTableDB.ADDRESS_FIELD, registry.getCustomer().getAddress());
-        if (registry.getCustomer().getPhoto() != null)
+        if (registry.getCustomer().getPhoto() != null) {
             customerStatement.setBinaryStream(CustomerTableDB.PHOTO_FIELD, registry.getCustomer().getPhoto(), registry.getCustomer().getPhoto().available());
-        else
+        } else {
             customerStatement.setBinaryStream(CustomerTableDB.PHOTO_FIELD, null);
-        registryStatement = connection.prepareStatement(INSERT_CUSTOMER_REGISTRATION_QUERY);
+        }
+        PreparedStatement registryStatement = connection.prepareStatement(INSERT_CUSTOMER_REGISTRATION_QUERY);
         registryStatement.setString(CustomerTableDB.ID_CUSTOMER_FIELD, registry.getCustomer().getId());
         registryStatement.setString(CustomerRegistrationTableDB.PLAN_FIELD, registry.getPlan());
         registryStatement.setString(CustomerRegistrationTableDB.REGISTRATION_DATE_FIELD, registry.getRegistrationDate());
@@ -66,47 +65,48 @@ public class CustomerTransaction {
         if(customerRegistryAffected == ROW_AFFECTED & registryRowAffected  == ROW_AFFECTED) {
             connection.commit();
         }
-    }
-
-    private void closeInstancesTransaction() throws TransactionException {
-        try {
-            closeStatementsSQL();
-        } catch (SQLException sqlException) {
-            throw new TransactionException(sqlException.getMessage(), sqlException.getCause());
-        }
-    }
-
-    private void closeStatementsSQL() throws SQLException {
         customerStatement.close();
         registryStatement.close();
     }
 
-    public List<CustomerRegistration> getAllCustomerRecords() throws TransactionException{
-        List<CustomerRegistration> registry = new ArrayList<>();
+    public final List<CustomerRegistration> getAllCustomerRecords() throws TransactionException {
         try {
-            return tryGetAllCustomerRecords(registry);
+            return tryGetAllCustomerRecords();
         } catch (SQLException sqlException) {
-            throw new TransactionException(sqlException.getMessage(), sqlException.getCause());
+            throwCustomerTransactionException(sqlException.getMessage(), sqlException.getCause());
+        } finally {
+            try {
+                resultCustomer.close();
+            } catch (SQLException sqlException) {
+                throwCustomerTransactionException(sqlException.getMessage(), sqlException.getCause());
+            }
         }
+        return null;
     }
 
-    private List<CustomerRegistration> tryGetAllCustomerRecords(List<CustomerRegistration> registry) throws SQLException {
+    private List<CustomerRegistration> tryGetAllCustomerRecords() throws SQLException {
+        List<CustomerRegistration> registry = new ArrayList<>();
         connection.setAutoCommit(false);
-        PreparedStatement customerStatement = connection.prepareStatement(GET_ALL_CUSTOMER_RECORDS_QUERY);
-        ResultSet result = customerStatement.executeQuery();
-        while(result.next()){
+        customerStatement = connection.prepareStatement(GET_ALL_CUSTOMER_RECORDS_QUERY);
+        resultCustomer = customerStatement.executeQuery();
+        while(resultCustomer.next()) {
             CustomerRegistration customerRegistration = new CustomerRegistration();
             Customer customer = new Customer();
             customerRegistration.setCustomer(customer);
-            customerRegistration.getCustomer().setName(result.getString(CustomerTableDB.NAME_CELL_ROW));
-            customerRegistration.getCustomer().setAge(result.getInt(CustomerTableDB.AGE_CELL_ROW));
-            customerRegistration.getCustomer().setAddress(result.getString(CustomerTableDB.ADDRESS_CELL_ROW));
-            customerRegistration.setPlan(result.getString(CustomerRegistrationTableDB.PLAN_CELL_ROW));
-            customerRegistration.setRegistrationDate(result.getString(CustomerRegistrationTableDB.REGISTRATION_DATE_CELL_ROW));
-            customerRegistration.setRegistrationLimit(result.getString(CustomerRegistrationTableDB.REGISTRATION_LIMIT_CELL_ROW));
+            customerRegistration.getCustomer().setName(resultCustomer.getString(CustomerTableDB.NAME_CELL_ROW));
+            customerRegistration.getCustomer().setAge(resultCustomer.getInt(CustomerTableDB.AGE_CELL_ROW));
+            customerRegistration.getCustomer().setAddress(resultCustomer.getString(CustomerTableDB.ADDRESS_CELL_ROW));
+            customerRegistration.setPlan(resultCustomer.getString(CustomerRegistrationTableDB.PLAN_CELL_ROW));
+            customerRegistration.setRegistrationDate(resultCustomer.getString(CustomerRegistrationTableDB.REGISTRATION_DATE_CELL_ROW));
+            customerRegistration.setRegistrationLimit(resultCustomer.getString(CustomerRegistrationTableDB.REGISTRATION_LIMIT_CELL_ROW));
             registry.add(customerRegistration);
         }
+        customerStatement.close();
         return registry;
+    }
+
+    private void throwCustomerTransactionException(String message, Throwable cause) throws TransactionException {
+        throw new TransactionException(message, cause);
     }
 
 }

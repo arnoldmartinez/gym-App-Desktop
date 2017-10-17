@@ -35,6 +35,7 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPostClient;
     public javax.swing.JComboBox<String> cmbPlan;
+    private javax.swing.JToggleButton jToggleButton1;
     public com.toedter.calendar.JDateChooser jdcLimitDate;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblAge;
@@ -108,6 +109,7 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
         lblCostRequired = new javax.swing.JLabel();
         pnlCommand = new javax.swing.JPanel();
         btnPostClient = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
         pnlTittle = new javax.swing.JPanel();
         lblTittle = new javax.swing.JLabel();
         lblRegistrationDate = new javax.swing.JLabel();
@@ -257,6 +259,8 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
             }
         });
 
+        jToggleButton1.setText("Modificar");
+
         javax.swing.GroupLayout pnlCommandLayout = new javax.swing.GroupLayout(pnlCommand);
         pnlCommand.setLayout(pnlCommandLayout);
         pnlCommandLayout.setHorizontalGroup(
@@ -264,13 +268,17 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
             .addGroup(pnlCommandLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnPostClient, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlCommandLayout.setVerticalGroup(
             pnlCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCommandLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnPostClient, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlCommandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnPostClient, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

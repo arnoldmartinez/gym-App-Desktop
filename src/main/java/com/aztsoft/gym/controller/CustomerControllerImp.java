@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * @classname CustomerControllerImp
+ * @version V1
+ * @date 11/09/2017
+ * @author arnold9108@gmail.com copyright notice
  */
 package com.aztsoft.gym.controller;
 
@@ -15,10 +16,6 @@ import com.aztsoft.gym.view.forms.abstractview.ViewForm;
 
 import java.util.List;
 
-/**
- *
- * @author arnold9108@gmail.com 11/09/2017
- */
 public class CustomerControllerImp implements CustomerController {
     private CustomerForm customerView;
     private CustomerCatalogForm CustomerCatalogView;

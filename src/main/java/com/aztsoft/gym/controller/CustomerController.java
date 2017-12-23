@@ -6,11 +6,13 @@
 package com.aztsoft.gym.controller;
 
 
+import com.aztsoft.gym.domain.CustomerRegistration;
+
 /**
  *
  * @author windows
  */
 public interface CustomerController {
-    void postCustomer();
+    void save(CustomerRegistration registry);
     void getAllCustomerRecords();
 }

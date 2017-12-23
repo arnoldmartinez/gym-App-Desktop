@@ -2,10 +2,8 @@ package com.aztsoft.gym.view.forms.form;
 
 import com.aztsoft.gym.controller.CustomerController;
 import com.aztsoft.gym.controller.CustomerControllerImp;
-import com.aztsoft.gym.view.command.abstractcommand.Command;
-import com.aztsoft.gym.view.command.concrete.GetAllCustomerRecordsCommand;
+import com.aztsoft.gym.service.CustomerServiceImp;
 import com.aztsoft.gym.view.forms.abstractview.ViewForm;
-
 import javax.swing.table.TableModel;
 
 /**
@@ -78,10 +76,8 @@ public final class CustomerCatalogForm extends javax.swing.JFrame implements Vie
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        CustomerController customerController;
-        customerController = new CustomerControllerImp(this);
-        Command getAllCustomerRecordsCommand = new GetAllCustomerRecordsCommand(customerController);
-        getAllCustomerRecordsCommand.execute();
+        CustomerServiceImp service = new CustomerServiceImp(null);
+        CustomerController customerController = new CustomerControllerImp(service);
     }//GEN-LAST:event_formWindowOpened
 
     public void setModel(TableModel model){

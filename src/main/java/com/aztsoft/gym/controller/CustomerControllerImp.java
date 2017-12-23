@@ -7,6 +7,7 @@
 package com.aztsoft.gym.controller;
 
 import com.aztsoft.gym.domain.CustomerRegistration;
+import com.aztsoft.gym.persistence.repository.Repository;
 import com.aztsoft.gym.service.CustomerService;
 import com.aztsoft.gym.service.CustomerServiceImp;
 import com.aztsoft.gym.view.forms.form.CustomerCatalogForm;
@@ -16,39 +17,25 @@ import com.aztsoft.gym.view.forms.abstractview.ViewForm;
 
 import java.util.List;
 
-public class CustomerControllerImp implements CustomerController {
-    private CustomerForm customerView;
-    private CustomerCatalogForm CustomerCatalogView;
+public final class CustomerControllerImp implements CustomerController {
+    private final CustomerService service;
 
-    public CustomerControllerImp() {
-    }
-    
-    public CustomerControllerImp(ViewForm view) {
-        setview(view);
-    }
-    
-    private void setview(ViewForm view) {
-        if(view instanceof CustomerForm) {
-            customerView = (CustomerForm) view;
-        }
-        if(view instanceof CustomerCatalogForm) {
-            this.CustomerCatalogView = (CustomerCatalogForm) view;
-        }
+    public CustomerControllerImp(CustomerService service) {
+        this.service = service;
     }
     
     @Override
-    public final void postCustomer() {
-        CustomerService customerService = new CustomerServiceImp(customerView);
-        customerService.postCustomer(customerView.getDataRegistry());
+    public final void save(CustomerRegistration registry) {
+        service.postCustomer(registry);
     }
 
     @Override
     public final void getAllCustomerRecords() {
-        CustomerService customerService = new CustomerServiceImp();
+        CustomerService customerService = new CustomerServiceImp(null);
         List<CustomerRegistration> registres = customerService.getAllCustomerRecords();
         CustomerTableModel customerModel = new CustomerTableModel();
         customerModel.addRecordAll(registres);
-        CustomerCatalogView.setModel(customerModel);
+        //CustomerCatalogView.setModel(customerModel);
     }
 
 }

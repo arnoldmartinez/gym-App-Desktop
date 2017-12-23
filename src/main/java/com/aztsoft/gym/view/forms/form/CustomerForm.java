@@ -4,8 +4,9 @@ import com.aztsoft.gym.controller.CustomerController;
 import com.aztsoft.gym.controller.CustomerControllerImp;
 import com.aztsoft.gym.domain.Customer;
 import com.aztsoft.gym.domain.CustomerRegistration;
-import com.aztsoft.gym.view.command.concrete.AddCustomerCommand;
-import com.aztsoft.gym.view.command.abstractcommand.Command;
+import com.aztsoft.gym.persistence.repository.RegistryMySQLRespository;
+import com.aztsoft.gym.persistence.repository.Repository;
+import com.aztsoft.gym.service.CustomerServiceImp;
 import com.aztsoft.gym.view.forms.abstractview.ViewForm;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
@@ -628,9 +629,10 @@ public final class CustomerForm extends javax.swing.JFrame implements ViewForm {
     }//GEN-LAST:event_cmbPlanKeyPressed
 
     private void btnPostClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostClientActionPerformed
-        CustomerController controller = new CustomerControllerImp(this);
-        Command addCustomer = new AddCustomerCommand(controller);
-        addCustomer.execute();
+        Repository<CustomerRegistration> customerRegistration = new RegistryMySQLRespository();
+        CustomerServiceImp service = new CustomerServiceImp(customerRegistration);
+        CustomerController controller = new CustomerControllerImp(service);
+        controller.save(getDataRegistry());
     }//GEN-LAST:event_btnPostClientActionPerformed
 
     private void setUpperCase(KeyEvent evt) {
